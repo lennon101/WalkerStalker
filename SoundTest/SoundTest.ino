@@ -47,7 +47,7 @@ void loop()
 		longAverageAverageTotal += average;
 	}
 	
-	if (longAverageCount >= 20){
+	if (longAverageCount >= 5){
 		int averageMax = longAverageMaxTotal/longAverageCount;
 		int averageAverage = longAverageAverageTotal/longAverageCount;
 		Serial.print("-------------------------------------------------");

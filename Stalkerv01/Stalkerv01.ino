@@ -57,7 +57,7 @@ EnergyMonitor currentSensor;
 void setup()
 {
 	// Comms
-	Serial.begin(9600);
+	Serial.begin(57600);
 	Serial.println("Awake");
 	
 	initialiseDatalog();
@@ -71,7 +71,7 @@ void setup()
 	surfaceTempSensor.begin(TMP006_CFG_1SAMPLE);
 
 	humiditySensor03.begin();
-	humiditySensor21.begin();	
+	humiditySensor21.begin();
 
 	lightSensor.begin();
 	lightSensor2.begin();
@@ -120,33 +120,33 @@ void loop()
 	// Print values
 	DateTime timeStamp = RTC.now();
 	printTimeStamp(timeStamp);
+	Serial.print("  Ta:");
+	Serial.print(airTemp1);
 	Serial.print(",");
-	Serial.print(int(airTemp1*100));
+	Serial.print(airTemp2);
+	Serial.print("  Th:");
+	Serial.print(temp03);
 	Serial.print(",");
-	Serial.print(int(airTemp2*100));
+	Serial.print(temp21);
 	Serial.print(",");
-	Serial.print(int(temp03*100));
+	Serial.print(temp15);
+	Serial.print("  Ts:");
+	Serial.print(surfaceTemp);
+	Serial.print("  RH:");
+	Serial.print(humidity03);
 	Serial.print(",");
-	Serial.print(temp21, 2);
+	Serial.print(humidity21);
 	Serial.print(",");
-	Serial.print(temp15, 2);
-	Serial.print(",");
-	Serial.print(surfaceTemp, 2);
-	Serial.print(",");
-	Serial.print(humidity03, 2);
-	Serial.print(",");
-	Serial.print(humidity21, 2);
-	Serial.print(",");
-	Serial.print(humidity15, 2);
-	Serial.print(",");
+	Serial.print(humidity15);
+	Serial.print("  L:");
 	Serial.print(lightLevel);
 	Serial.print(",");
 	Serial.print(lightLevel2);
 	Serial.print(",");
 	Serial.print(ldrLightLevel);
-	Serial.print(",");
+	Serial.print("  SPL:");
 	Serial.print(soundLevel);
-	Serial.print(",");
+	Serial.print("  I:");
 	Serial.println(currentSense);
 	
 	delay(200);
@@ -231,6 +231,12 @@ void printTimeStamp(DateTime timeStamp){
 	Serial.print(":");
 	Serial.print(timeStamp.minute(), DEC);
 	Serial.print(":");
+	
+	// Add leading 0 if needed
+	if(timeStamp.second() < 10){
+		Serial.print("0");
+	}
+	
 	Serial.print(timeStamp.second(), DEC);
 }
 
@@ -249,23 +255,25 @@ float getCorrectHTU21DHumidity(float temperature, float humidity){
 
 
 /**
-* Get the maximum sound level over the specified sampling period
+* Get the average sound level over the specified sampling period
 *
 * @param samplePeriod Listening period for the sampling in ms.
-* @return Maximum sound level in 10-bit counts
+* @return Average sound level in 10-bit counts
 */
 int getSoundLevel(int samplePeriod){
 	unsigned long startTime = millis();
-	int maxSoundLevel = 0;
+	long total = 0;
+	long count = 0;
 	
 	while (millis() < (startTime + samplePeriod) && samplePeriod > 0){
 		int soundLevel = analogRead(MIC_PIN);
 		
-		if (soundLevel > maxSoundLevel){
-			maxSoundLevel = soundLevel;
-		}
+		total += soundLevel;
+		count += 1;
+
 	}
 	
-	return maxSoundLevel;
+	int average = int(total/count);
+	return average;
 }
 

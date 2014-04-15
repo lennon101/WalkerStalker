@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>6.1</ProjectVersion>
     <ToolchainName>com.Atmel.AVRGCC8.CPP</ToolchainName>
-    <ProjectGuid>{73cae3f8-e4bd-4574-bc49-8aa6ad92094e}</ProjectGuid>
+    <ProjectGuid>{07b459b4-8d76-4638-bc6d-a459ba2d616b}</ProjectGuid>
     <avrdevice>atmega328p</avrdevice>
     <avrdeviceseries>none</avrdeviceseries>
     <OutputType>Executable</OutputType>
@@ -12,9 +12,9 @@
     <OutputFileName>$(MSBuildProjectName)</OutputFileName>
     <OutputFileExtension>.elf</OutputFileExtension>
     <OutputDirectory>$(MSBuildProjectDirectory)\$(Configuration)</OutputDirectory>
-    <AssemblyName>Stalkerv00SD</AssemblyName>
-    <Name>Stalkerv00SD</Name>
-    <RootNamespace>Stalkerv00SD</RootNamespace>
+    <AssemblyName>Stalkerv01</AssemblyName>
+    <Name>Stalkerv01</Name>
+    <RootNamespace>Stalkerv01</RootNamespace>
     <ToolchainFlavour>Native</ToolchainFlavour>
     <KeepTimersRunning>true</KeepTimersRunning>
     <OverrideVtor>false</OverrideVtor>
@@ -28,20 +28,21 @@
     <BootSegment>0</BootSegment>
     <AsfFrameworkConfig>
       <framework-data>
-        <options />
-        <configurations />
-        <files />
-        <documentation help="" />
-        <offline-documentation help="" />
-        <dependencies>
-          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.3.0" />
-        </dependencies>
-      </framework-data>
+  <options />
+  <configurations />
+  <files />
+  <documentation help="" />
+  <offline-documentation help="" />
+  <dependencies>
+    <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.3.0" />
+  </dependencies>
+</framework-data>
     </AsfFrameworkConfig>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <ToolchainSettings>
       <AvrGccCpp>
+        <avrgcc.common.optimization.RelaxBranches>True</avrgcc.common.optimization.RelaxBranches>
         <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
         <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
         <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
@@ -318,7 +319,6 @@
     </ToolchainSettings>
     <VisualMicroSettings>
       <VisualMicroSettings>
-        <arduino.upload.port>COM5</arduino.upload.port>
         <arduino.board.name>pro_8MHzatmega328</arduino.board.name>
         <arduino.board.desc>Arduino Pro or Pro Mini w/ ATmega328 (3.3V, 8 MHz)</arduino.board.desc>
         <arduino.board.property_bag>name=Arduino Pro or Pro Mini w/ ATmega328 (3.3V, 8 MHz)
@@ -468,12 +468,14 @@ build.arch=AVR
         <visualmicro.application.name>arduino15x</visualmicro.application.name>
         <visualmicro.package.name>arduino</visualmicro.package.name>
         <visualmicro.platform.name>avr</visualmicro.platform.name>
+        <arduino.upload.port>COM5</arduino.upload.port>
       </VisualMicroSettings>
     </VisualMicroSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <ToolchainSettings>
       <AvrGccCpp>
+        <avrgcc.common.optimization.RelaxBranches>True</avrgcc.common.optimization.RelaxBranches>
         <avrgcc.common.outputfiles.hex>True</avrgcc.common.outputfiles.hex>
         <avrgcc.common.outputfiles.lss>True</avrgcc.common.outputfiles.lss>
         <avrgcc.common.outputfiles.eep>True</avrgcc.common.outputfiles.eep>
@@ -750,7 +752,6 @@ build.arch=AVR
     </ToolchainSettings>
     <VisualMicroSettings>
       <VisualMicroSettings>
-        <arduino.upload.port>COM5</arduino.upload.port>
         <arduino.board.name>pro_8MHzatmega328</arduino.board.name>
         <arduino.board.desc>Arduino Pro or Pro Mini w/ ATmega328 (3.3V, 8 MHz)</arduino.board.desc>
         <arduino.board.property_bag>name=Arduino Pro or Pro Mini w/ ATmega328 (3.3V, 8 MHz)
@@ -900,11 +901,12 @@ build.arch=AVR
         <visualmicro.application.name>arduino15x</visualmicro.application.name>
         <visualmicro.package.name>arduino</visualmicro.package.name>
         <visualmicro.platform.name>avr</visualmicro.platform.name>
+        <arduino.upload.port>COM5</arduino.upload.port>
       </VisualMicroSettings>
     </VisualMicroSettings>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="Stalkerv00SD.ino">
+    <None Include="Stalkerv01.ino">
       <SubType>compile</SubType>
     </None>
   </ItemGroup>
@@ -912,7 +914,7 @@ build.arch=AVR
     <Folder Include="Visual Micro\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Visual Micro\.Stalkerv00SD.vsarduino.h">
+    <Compile Include="Visual Micro\.Stalkerv01.vsarduino.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
