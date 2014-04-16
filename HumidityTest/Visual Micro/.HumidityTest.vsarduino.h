@@ -15,6 +15,8 @@ extern "C" void __cxa_pure_virtual() {;}
 
 //
 //
+void initialiseDatalog();
+void printTimeStamp(DateTime timeStamp);
 float getCorrectHTU21DHumidity(float temperature, float humidity);
 
 #include "c:\Program Files (x86)\arduino\hardware\arduino\avr\variants\standard\pins_arduino.h" 

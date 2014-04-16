@@ -11,7 +11,7 @@
 #include <Adafruit_TSL2561_U.h>
 #include <BH1750FVI.h>
 #include <SHT15.h>
-#include <HTU21D.h>
+#include <HTU21D.h>  // I2C Timeout modified to allow slower clock rate; no longer produces errors
 #include <DHT.h>
 #include <DS3231.h>
 
@@ -244,7 +244,7 @@ void printTimeStamp(DateTime timeStamp){
 /**
 * Get the corrected relative humidity after apply conversion coefficients
 *
-* @param temperature The temperature of the HTU21D sensor in °C
+* @param temperature The temperature of the HTU21D sensor in ï¿½C
 * @param humidity The relative humidity reading of the HTU21D sensor in %
 * @return The corrected humidity value in %
 */

@@ -62,16 +62,20 @@
           <ListValues>
             <Value>c:\Program Files (x86)\arduino\hardware\arduino\avr\cores\arduino</Value>
             <Value>c:\Program Files (x86)\arduino\hardware\arduino\avr\variants\standard</Value>
+            <Value>e:\Dropbox\Projects\libraries\Adafruit_Sensor</Value>
+            <Value>e:\Dropbox\Projects\libraries\Adafruit_Sensor\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\BH1750FVI</Value>
             <Value>e:\Dropbox\Projects\libraries\BH1750FVI\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\DallasTemperature</Value>
             <Value>e:\Dropbox\Projects\libraries\DallasTemperature\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\DHT</Value>
             <Value>e:\Dropbox\Projects\libraries\DHT\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\DHT22</Value>
-            <Value>e:\Dropbox\Projects\libraries\DHT22\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\DS3231</Value>
             <Value>e:\Dropbox\Projects\libraries\DS3231\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\EEPROM</Value>
+            <Value>e:\Dropbox\Projects\libraries\EEPROM\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\EmonLib</Value>
+            <Value>e:\Dropbox\Projects\libraries\EmonLib\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\Fat16</Value>
             <Value>e:\Dropbox\Projects\libraries\Fat16\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\HTU21D</Value>
@@ -80,18 +84,26 @@
             <Value>e:\Dropbox\Projects\libraries\INA209\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\Mirf</Value>
             <Value>e:\Dropbox\Projects\libraries\Mirf\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\MLX90614</Value>
+            <Value>e:\Dropbox\Projects\libraries\MLX90614\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\NewPing</Value>
             <Value>e:\Dropbox\Projects\libraries\NewPing\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\OneWire</Value>
             <Value>e:\Dropbox\Projects\libraries\OneWire\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\Ping</Value>
+            <Value>e:\Dropbox\Projects\libraries\Ping\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\RF24</Value>
             <Value>e:\Dropbox\Projects\libraries\RF24\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\RgbStrip</Value>
             <Value>e:\Dropbox\Projects\libraries\RgbStrip\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\SD</Value>
+            <Value>e:\Dropbox\Projects\libraries\SD\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\SdFat</Value>
             <Value>e:\Dropbox\Projects\libraries\SdFat\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\SeeedStalkerBattery</Value>
             <Value>e:\Dropbox\Projects\libraries\SeeedStalkerBattery\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\SFE_TSL2561</Value>
+            <Value>e:\Dropbox\Projects\libraries\SFE_TSL2561\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\SHT15</Value>
             <Value>e:\Dropbox\Projects\libraries\SHT15\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\SimpleTimer</Value>
@@ -182,16 +194,20 @@
           <ListValues>
             <Value>c:\Program Files (x86)\arduino\hardware\arduino\avr\cores\arduino</Value>
             <Value>c:\Program Files (x86)\arduino\hardware\arduino\avr\variants\standard</Value>
+            <Value>e:\Dropbox\Projects\libraries\Adafruit_Sensor</Value>
+            <Value>e:\Dropbox\Projects\libraries\Adafruit_Sensor\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\BH1750FVI</Value>
             <Value>e:\Dropbox\Projects\libraries\BH1750FVI\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\DallasTemperature</Value>
             <Value>e:\Dropbox\Projects\libraries\DallasTemperature\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\DHT</Value>
             <Value>e:\Dropbox\Projects\libraries\DHT\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\DHT22</Value>
-            <Value>e:\Dropbox\Projects\libraries\DHT22\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\DS3231</Value>
             <Value>e:\Dropbox\Projects\libraries\DS3231\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\EEPROM</Value>
+            <Value>e:\Dropbox\Projects\libraries\EEPROM\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\EmonLib</Value>
+            <Value>e:\Dropbox\Projects\libraries\EmonLib\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\Fat16</Value>
             <Value>e:\Dropbox\Projects\libraries\Fat16\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\HTU21D</Value>
@@ -200,18 +216,26 @@
             <Value>e:\Dropbox\Projects\libraries\INA209\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\Mirf</Value>
             <Value>e:\Dropbox\Projects\libraries\Mirf\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\MLX90614</Value>
+            <Value>e:\Dropbox\Projects\libraries\MLX90614\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\NewPing</Value>
             <Value>e:\Dropbox\Projects\libraries\NewPing\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\OneWire</Value>
             <Value>e:\Dropbox\Projects\libraries\OneWire\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\Ping</Value>
+            <Value>e:\Dropbox\Projects\libraries\Ping\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\RF24</Value>
             <Value>e:\Dropbox\Projects\libraries\RF24\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\RgbStrip</Value>
             <Value>e:\Dropbox\Projects\libraries\RgbStrip\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\SD</Value>
+            <Value>e:\Dropbox\Projects\libraries\SD\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\SdFat</Value>
             <Value>e:\Dropbox\Projects\libraries\SdFat\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\SeeedStalkerBattery</Value>
             <Value>e:\Dropbox\Projects\libraries\SeeedStalkerBattery\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\SFE_TSL2561</Value>
+            <Value>e:\Dropbox\Projects\libraries\SFE_TSL2561\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\SHT15</Value>
             <Value>e:\Dropbox\Projects\libraries\SHT15\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\SimpleTimer</Value>
@@ -292,6 +316,11 @@
         <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
       </AvrGccCpp>
     </ToolchainSettings>
+    <VisualMicroSettings>
+      <VisualMicroSettings>
+        <arduino.upload.port>COM5</arduino.upload.port>
+      </VisualMicroSettings>
+    </VisualMicroSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <ToolchainSettings>
@@ -316,16 +345,20 @@
           <ListValues>
             <Value>c:\Program Files (x86)\arduino\hardware\arduino\avr\cores\arduino</Value>
             <Value>c:\Program Files (x86)\arduino\hardware\arduino\avr\variants\standard</Value>
+            <Value>e:\Dropbox\Projects\libraries\Adafruit_Sensor</Value>
+            <Value>e:\Dropbox\Projects\libraries\Adafruit_Sensor\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\BH1750FVI</Value>
             <Value>e:\Dropbox\Projects\libraries\BH1750FVI\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\DallasTemperature</Value>
             <Value>e:\Dropbox\Projects\libraries\DallasTemperature\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\DHT</Value>
             <Value>e:\Dropbox\Projects\libraries\DHT\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\DHT22</Value>
-            <Value>e:\Dropbox\Projects\libraries\DHT22\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\DS3231</Value>
             <Value>e:\Dropbox\Projects\libraries\DS3231\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\EEPROM</Value>
+            <Value>e:\Dropbox\Projects\libraries\EEPROM\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\EmonLib</Value>
+            <Value>e:\Dropbox\Projects\libraries\EmonLib\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\Fat16</Value>
             <Value>e:\Dropbox\Projects\libraries\Fat16\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\HTU21D</Value>
@@ -334,18 +367,26 @@
             <Value>e:\Dropbox\Projects\libraries\INA209\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\Mirf</Value>
             <Value>e:\Dropbox\Projects\libraries\Mirf\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\MLX90614</Value>
+            <Value>e:\Dropbox\Projects\libraries\MLX90614\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\NewPing</Value>
             <Value>e:\Dropbox\Projects\libraries\NewPing\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\OneWire</Value>
             <Value>e:\Dropbox\Projects\libraries\OneWire\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\Ping</Value>
+            <Value>e:\Dropbox\Projects\libraries\Ping\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\RF24</Value>
             <Value>e:\Dropbox\Projects\libraries\RF24\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\RgbStrip</Value>
             <Value>e:\Dropbox\Projects\libraries\RgbStrip\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\SD</Value>
+            <Value>e:\Dropbox\Projects\libraries\SD\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\SdFat</Value>
             <Value>e:\Dropbox\Projects\libraries\SdFat\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\SeeedStalkerBattery</Value>
             <Value>e:\Dropbox\Projects\libraries\SeeedStalkerBattery\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\SFE_TSL2561</Value>
+            <Value>e:\Dropbox\Projects\libraries\SFE_TSL2561\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\SHT15</Value>
             <Value>e:\Dropbox\Projects\libraries\SHT15\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\SimpleTimer</Value>
@@ -436,16 +477,20 @@
           <ListValues>
             <Value>c:\Program Files (x86)\arduino\hardware\arduino\avr\cores\arduino</Value>
             <Value>c:\Program Files (x86)\arduino\hardware\arduino\avr\variants\standard</Value>
+            <Value>e:\Dropbox\Projects\libraries\Adafruit_Sensor</Value>
+            <Value>e:\Dropbox\Projects\libraries\Adafruit_Sensor\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\BH1750FVI</Value>
             <Value>e:\Dropbox\Projects\libraries\BH1750FVI\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\DallasTemperature</Value>
             <Value>e:\Dropbox\Projects\libraries\DallasTemperature\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\DHT</Value>
             <Value>e:\Dropbox\Projects\libraries\DHT\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\DHT22</Value>
-            <Value>e:\Dropbox\Projects\libraries\DHT22\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\DS3231</Value>
             <Value>e:\Dropbox\Projects\libraries\DS3231\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\EEPROM</Value>
+            <Value>e:\Dropbox\Projects\libraries\EEPROM\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\EmonLib</Value>
+            <Value>e:\Dropbox\Projects\libraries\EmonLib\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\Fat16</Value>
             <Value>e:\Dropbox\Projects\libraries\Fat16\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\HTU21D</Value>
@@ -454,18 +499,26 @@
             <Value>e:\Dropbox\Projects\libraries\INA209\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\Mirf</Value>
             <Value>e:\Dropbox\Projects\libraries\Mirf\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\MLX90614</Value>
+            <Value>e:\Dropbox\Projects\libraries\MLX90614\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\NewPing</Value>
             <Value>e:\Dropbox\Projects\libraries\NewPing\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\OneWire</Value>
             <Value>e:\Dropbox\Projects\libraries\OneWire\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\Ping</Value>
+            <Value>e:\Dropbox\Projects\libraries\Ping\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\RF24</Value>
             <Value>e:\Dropbox\Projects\libraries\RF24\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\RgbStrip</Value>
             <Value>e:\Dropbox\Projects\libraries\RgbStrip\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\SD</Value>
+            <Value>e:\Dropbox\Projects\libraries\SD\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\SdFat</Value>
             <Value>e:\Dropbox\Projects\libraries\SdFat\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\SeeedStalkerBattery</Value>
             <Value>e:\Dropbox\Projects\libraries\SeeedStalkerBattery\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\SFE_TSL2561</Value>
+            <Value>e:\Dropbox\Projects\libraries\SFE_TSL2561\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\SHT15</Value>
             <Value>e:\Dropbox\Projects\libraries\SHT15\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\SimpleTimer</Value>
@@ -546,6 +599,11 @@
         <avrgcccpp.assembler.debugging.DebugLevel>Default (-Wa,-g)</avrgcccpp.assembler.debugging.DebugLevel>
       </AvrGccCpp>
     </ToolchainSettings>
+    <VisualMicroSettings>
+      <VisualMicroSettings>
+        <arduino.upload.port>COM5</arduino.upload.port>
+      </VisualMicroSettings>
+    </VisualMicroSettings>
   </PropertyGroup>
   <ItemGroup>
     <None Include="HumidityTest.ino">
