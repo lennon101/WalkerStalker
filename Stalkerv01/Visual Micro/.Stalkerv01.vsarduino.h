@@ -13,12 +13,17 @@
 #define __cplusplus
 extern "C" void __cxa_pure_virtual() {;}
 
+void initialiseTemperatureSensors();
+void initialiseHumiditySensors();
+void initialiseLightSensors();
 //
 //
 void initialiseDatalog();
 void printTimeStamp(DateTime timeStamp);
 float getCorrectHTU21DHumidity(float temperature, float humidity);
 int getSoundLevel(int samplePeriod);
+void sleepNow();
+void clockInterrupt();
 
 #include "c:\Program Files (x86)\arduino\hardware\arduino\avr\variants\standard\pins_arduino.h" 
 #include "c:\Program Files (x86)\arduino\hardware\arduino\avr\cores\arduino\arduino.h"

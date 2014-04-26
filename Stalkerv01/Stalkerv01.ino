@@ -14,46 +14,93 @@
 #include <HTU21D.h>  // I2C Timeout modified to allow slower clock rate; no longer produces errors
 #include <DHT.h>
 #include <DS3231.h>
+#include "avr/power.h"
+#include "avr/sleep.h"
 
 const char filename[] = "log.csv";
 const char headings[] = "Timestamp,Air 1,Air 2,Temp 03,Temp 21,Temp 15,Surface,Humidity 03,Humidity 21,Humidity 15,Light 1,Light 2,LDR,Sound,Current";
 
+// Pin Assignments
 #define XBEE_PWR_PIN 5
-
+#define RHT03_PIN 3
 #define AIR_TEMP_PIN 9
+#define SHT15_CLK_PIN 7
+#define SHT15_DATA_PIN 6
+#define LDR_PIN 2
+#define CHIP_SELECT_PIN 10	// SD Card
+#define CURRENT_SENSE_PIN A1
+#define MIC_PIN A0
+
+// Temperature
 OneWire oneWire(AIR_TEMP_PIN);
 DallasTemperature airTempSensors(&oneWire);
 Adafruit_TMP006 surfaceTempSensor;
 
-#define RHT03_PIN 3
+// Humidity
 #define RHT03_TYPE DHT22
 #define RHT03_COUNT 3
 DHT humiditySensor03(RHT03_PIN, RHT03_TYPE, RHT03_COUNT);
-
-#define SHT15_CLK_PIN 7
-#define SHT15_DATA_PIN 6
+HTU21D humiditySensor21;
 SHT15 humiditySensor15(SHT15_CLK_PIN, SHT15_DATA_PIN);
 
-#define LDR_PIN 2
+// Light
 Adafruit_TSL2561_Unified lightSensor = Adafruit_TSL2561_Unified(TSL2561_ADDR_FLOAT);
 BH1750FVI lightSensor2;
 
-#define MIC_PIN 0
+// Sound
 #define MIC_SAMPLE_PERIOD 100
 
-DS3231 RTC;
-
-#define CHIP_SELECT_PIN 10
-File dataFile;
-
-HTU21D humiditySensor21;
-
-#define CURRENT_SENSE_PIN 1
+// Power
 #define TRANSFORMER_RATIO 2000
 #define BURDEN_RESISTOR 220
 const float CURRENT_CALIBRATION_FACTOR = TRANSFORMER_RATIO/BURDEN_RESISTOR;
 EnergyMonitor currentSensor;
 
+// Misc
+DS3231 RTC;
+const int INTERRUPT_NUM = 0;
+File dataFile;
+
+
+// Data variables
+int airTemp1;
+int airTemp2;
+int wallTemp;
+int caseTemp;
+
+int humidity1;
+int humidity2;
+int humidity3;
+
+void initialiseTemperatureSensors() 
+{
+	airTempSensors.begin();
+	surfaceTempSensor.begin(TMP006_CFG_1SAMPLE);
+}
+
+void initialiseHumiditySensors() 
+{
+	humiditySensor03.begin();
+	humiditySensor21.begin();
+}
+
+void initialiseLightSensors() 
+{
+	lightSensor.begin();
+	lightSensor2.begin();
+	lightSensor2.SetAddress(Device_Address_H);
+	lightSensor2.SetMode(Continuous_H_resolution_Mode);
+}
+
+
+
+
+
+
+/**
+* Initialization stage
+* Runs once when power is active
+*/
 void setup()
 {
 	// Comms
@@ -63,20 +110,12 @@ void setup()
 	initialiseDatalog();
 	
 	Wire.begin();
-	
 	RTC.begin();
 	
-	airTempSensors.begin();
+	initialiseTemperatureSensors();
+	initialiseHumiditySensors();
+	initialiseLightSensors();
 	
-	surfaceTempSensor.begin(TMP006_CFG_1SAMPLE);
-
-	humiditySensor03.begin();
-	humiditySensor21.begin();
-
-	lightSensor.begin();
-	lightSensor2.begin();
-	lightSensor2.SetAddress(Device_Address_H);
-	lightSensor2.SetMode(Continuous_H_resolution_Mode);
 	
 	currentSensor.current(CURRENT_SENSE_PIN, CURRENT_CALIBRATION_FACTOR);
 	
@@ -87,7 +126,7 @@ void loop()
 {
 	// Air temperature
 	airTempSensors.requestTemperatures();
-	float airTemp1 = airTempSensors.getTempCByIndex(0);
+	airTemp1 = int(airTempSensors.getTempCByIndex(0)*100);
 	float airTemp2 = airTempSensors.getTempCByIndex(1);
 	
 	// Surface temperature
@@ -119,67 +158,67 @@ void loop()
 	
 	// Print values
 	DateTime timeStamp = RTC.now();
-	printTimeStamp(timeStamp);
-	Serial.print("  Ta:");
+	//printTimeStamp(timeStamp);
+	//Serial.print("  Ta:");
 	Serial.print(airTemp1);
-	Serial.print(",");
-	Serial.print(airTemp2);
-	Serial.print("  Th:");
-	Serial.print(temp03);
-	Serial.print(",");
-	Serial.print(temp21);
-	Serial.print(",");
-	Serial.print(temp15);
-	Serial.print("  Ts:");
-	Serial.print(surfaceTemp);
-	Serial.print("  RH:");
-	Serial.print(humidity03);
-	Serial.print(",");
-	Serial.print(humidity21);
-	Serial.print(",");
-	Serial.print(humidity15);
-	Serial.print("  L:");
-	Serial.print(lightLevel);
-	Serial.print(",");
-	Serial.print(lightLevel2);
-	Serial.print(",");
-	Serial.print(ldrLightLevel);
-	Serial.print("  SPL:");
-	Serial.print(soundLevel);
-	Serial.print("  I:");
-	Serial.println(currentSense);
+	//Serial.print(",");
+	//Serial.print(airTemp2);
+	//Serial.print("  Th:");
+	//Serial.print(temp03);
+	//Serial.print(",");
+	//Serial.print(temp21);
+	//Serial.print(",");
+	//Serial.print(temp15);
+	//Serial.print("  Ts:");
+	//Serial.print(surfaceTemp);
+	//Serial.print("  RH:");
+	//Serial.print(humidity03);
+	//Serial.print(",");
+	//Serial.print(humidity21);
+	//Serial.print(",");
+	//Serial.print(humidity15);
+	//Serial.print("  L:");
+	//Serial.print(lightLevel);
+	//Serial.print(",");
+	//Serial.print(lightLevel2);
+	//Serial.print(",");
+	//Serial.print(ldrLightLevel);
+	//Serial.print("  SPL:");
+	//Serial.print(soundLevel);
+	//Serial.print("  I:");
+	//Serial.println(currentSense);
 	
 	delay(200);
 	
 	dataFile.print(timeStamp.get());
-	dataFile.print(",");
-	dataFile.print(airTemp1, 2);
-	dataFile.print(",");
-	dataFile.print(airTemp2, 2);
-	dataFile.print(",");
-	dataFile.print(temp03, 2);
-	dataFile.print(",");
-	dataFile.print(temp21, 2);
-	dataFile.print(",");
-	dataFile.print(temp15, 2);
-	dataFile.print(",");
-	dataFile.print(surfaceTemp, 2);
-	dataFile.print(",");
-	dataFile.print(humidity03, 2);
-	dataFile.print(",");
-	dataFile.print(humidity21, 2);
-	dataFile.print(",");
-	dataFile.print(humidity15, 2);
-	dataFile.print(",");
-	dataFile.print(lightLevel);
-	dataFile.print(",");
-	dataFile.print(lightLevel2);
-	dataFile.print(",");
-	dataFile.print(ldrLightLevel);
-	dataFile.print(",");
-	dataFile.print(soundLevel);
-	dataFile.print(",");
-	dataFile.println(currentSense, 2);
+	//dataFile.print(",");
+	//dataFile.print(airTemp1, 2);
+	//dataFile.print(",");
+	//dataFile.print(airTemp2, 2);
+	//dataFile.print(",");
+	//dataFile.print(temp03, 2);
+	//dataFile.print(",");
+	//dataFile.print(temp21, 2);
+	//dataFile.print(",");
+	//dataFile.print(temp15, 2);
+	//dataFile.print(",");
+	//dataFile.print(surfaceTemp, 2);
+	//dataFile.print(",");
+	//dataFile.print(humidity03, 2);
+	//dataFile.print(",");
+	//dataFile.print(humidity21, 2);
+	//dataFile.print(",");
+	//dataFile.print(humidity15, 2);
+	//dataFile.print(",");
+	//dataFile.print(lightLevel);
+	//dataFile.print(",");
+	//dataFile.print(lightLevel2);
+	//dataFile.print(",");
+	//dataFile.print(ldrLightLevel);
+	//dataFile.print(",");
+	//dataFile.print(soundLevel);
+	//dataFile.print(",");
+	//dataFile.println(currentSense, 2);
 	
 	dataFile.flush();
 	
@@ -277,3 +316,23 @@ int getSoundLevel(int samplePeriod){
 	return average;
 }
 
+/**
+* Put the chip to sleep
+* Only a reset, or a button interrupt can wake up the chip
+*/
+void sleepNow()
+{
+	// Lowest level sleep - Highest power savings
+	set_sleep_mode(SLEEP_MODE_PWR_DOWN);
+	
+	sleep_enable();
+	
+	// Enable button interrupts
+	attachInterrupt(INTERRUPT_NUM, clockInterrupt, LOW);
+	sleep_mode();
+}
+
+
+void clockInterrupt(){
+	
+}
