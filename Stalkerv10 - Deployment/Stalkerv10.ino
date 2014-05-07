@@ -35,6 +35,8 @@ const char filename[] = "log.csv";
 #define MIC_PIN 0			// Analog - A0
 
 // Temperature
+#define AIR_TEMP_ID 0
+#define WALL_TEMP_ID 1
 OneWire oneWire(AIR_TEMP_PIN);
 DallasTemperature airTempSensors(&oneWire);
 Adafruit_TMP006 wallTemperatureSensor(0x44);
@@ -222,8 +224,8 @@ void readTemperature()
 	
 	// DS18B20 Readings
 	airTempSensors.requestTemperatures();
-	airTemp = floatToInt(airTempSensors.getTempCByIndex(0), DEFAULT_DECIMAL_PLACES);
-	wallTemp1 = floatToInt(airTempSensors.getTempCByIndex(0), DEFAULT_DECIMAL_PLACES);
+	airTemp = floatToInt(airTempSensors.getTempCByIndex(AIR_TEMP_ID), DEFAULT_DECIMAL_PLACES);
+	wallTemp1 = floatToInt(airTempSensors.getTempCByIndex(WALL_TEMP_ID), DEFAULT_DECIMAL_PLACES);
 	
 	// TMP006
 	wallTemp2 = floatToInt(wallTemperatureSensor.readObjTempC(), DEFAULT_DECIMAL_PLACES);
