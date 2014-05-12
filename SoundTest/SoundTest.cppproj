@@ -4,8 +4,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectVersion>6.1</ProjectVersion>
     <ToolchainName>com.Atmel.AVRGCC8.CPP</ToolchainName>
-    <ProjectGuid>{07b459b4-8d76-4638-bc6d-a459ba2d616b}</ProjectGuid>
-    <avrdevice>atmega2560</avrdevice>
+    <ProjectGuid>{1382cf05-6554-4a94-8f32-13926b585152}</ProjectGuid>
+    <avrdevice>atmega328p</avrdevice>
     <avrdeviceseries>none</avrdeviceseries>
     <OutputType>Executable</OutputType>
     <Language>CPP</Language>
@@ -28,15 +28,15 @@
     <BootSegment>0</BootSegment>
     <AsfFrameworkConfig>
       <framework-data>
-        <options />
-        <configurations />
-        <files />
-        <documentation help="" />
-        <offline-documentation help="" />
-        <dependencies>
-          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.3.0" />
-        </dependencies>
-      </framework-data>
+  <options />
+  <configurations />
+  <files />
+  <documentation help="" />
+  <offline-documentation help="" />
+  <dependencies>
+    <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.6.0" />
+  </dependencies>
+</framework-data>
     </AsfFrameworkConfig>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
@@ -51,122 +51,23 @@
         <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
         <avrgcc.compiler.symbols.DefSymbols>
           <ListValues>
-            <Value>__AVR_ATmega2560__</Value>
+            <Value>__AVR_ATmega328p__</Value>
+            <Value>__AVR_ATmega328P__</Value>
             <Value>ARDUINO=101</Value>
             <Value>ARDUINO_MAIN</Value>
-            <Value>F_CPU=16000000L</Value>
+            <Value>F_CPU=8000000L</Value>
             <Value>__AVR__</Value>
             <Value>__cplusplus</Value>
           </ListValues>
         </avrgcc.compiler.symbols.DefSymbols>
         <avrgcc.compiler.directories.IncludePaths>
           <ListValues>
-            <Value>c:\Program Files (x86)\arduino\hardware\arduino\avr\cores\arduino</Value>
-            <Value>c:\Program Files (x86)\arduino\hardware\arduino\avr\variants\mega</Value>
-            <Value>e:\Dropbox\Projects\libraries\Adafruit_Sensor</Value>
-            <Value>e:\Dropbox\Projects\libraries\Adafruit_Sensor\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\BH1750FVI</Value>
-            <Value>e:\Dropbox\Projects\libraries\BH1750FVI\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\DallasTemperature</Value>
-            <Value>e:\Dropbox\Projects\libraries\DallasTemperature\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\DHT</Value>
-            <Value>e:\Dropbox\Projects\libraries\DHT\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\DS3231</Value>
-            <Value>e:\Dropbox\Projects\libraries\DS3231\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\EEPROM</Value>
-            <Value>e:\Dropbox\Projects\libraries\EEPROM\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\EmonLib</Value>
-            <Value>e:\Dropbox\Projects\libraries\EmonLib\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\Fat16</Value>
-            <Value>e:\Dropbox\Projects\libraries\Fat16\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\HTU21D</Value>
-            <Value>e:\Dropbox\Projects\libraries\HTU21D\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\INA209</Value>
-            <Value>e:\Dropbox\Projects\libraries\INA209\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\Mirf</Value>
-            <Value>e:\Dropbox\Projects\libraries\Mirf\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\MLX90614</Value>
-            <Value>e:\Dropbox\Projects\libraries\MLX90614\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\NewPing</Value>
-            <Value>e:\Dropbox\Projects\libraries\NewPing\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\OneWire</Value>
-            <Value>e:\Dropbox\Projects\libraries\OneWire\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\Ping</Value>
-            <Value>e:\Dropbox\Projects\libraries\Ping\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\RF24</Value>
-            <Value>e:\Dropbox\Projects\libraries\RF24\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\RgbStrip</Value>
-            <Value>e:\Dropbox\Projects\libraries\RgbStrip\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\SD</Value>
-            <Value>e:\Dropbox\Projects\libraries\SD\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\SdFat</Value>
-            <Value>e:\Dropbox\Projects\libraries\SdFat\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\SeeedStalkerBattery</Value>
-            <Value>e:\Dropbox\Projects\libraries\SeeedStalkerBattery\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\SFE_TSL2561</Value>
-            <Value>e:\Dropbox\Projects\libraries\SFE_TSL2561\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\SHT15</Value>
-            <Value>e:\Dropbox\Projects\libraries\SHT15\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\SimpleTimer</Value>
-            <Value>e:\Dropbox\Projects\libraries\SimpleTimer\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\SPI85</Value>
-            <Value>e:\Dropbox\Projects\libraries\SPI85\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\Timer</Value>
-            <Value>e:\Dropbox\Projects\libraries\Timer\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\Timer1</Value>
-            <Value>e:\Dropbox\Projects\libraries\Timer1\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TimerThree</Value>
-            <Value>e:\Dropbox\Projects\libraries\TimerThree\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TinyRF24</Value>
-            <Value>e:\Dropbox\Projects\libraries\TinyRF24\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TinySPI</Value>
-            <Value>e:\Dropbox\Projects\libraries\TinySPI\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TM1638</Value>
-            <Value>e:\Dropbox\Projects\libraries\TM1638\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TMP006</Value>
-            <Value>e:\Dropbox\Projects\libraries\TMP006\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TSL2561</Value>
-            <Value>e:\Dropbox\Projects\libraries\TSL2561\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\XBee</Value>
-            <Value>e:\Dropbox\Projects\libraries\XBee\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Audio</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Audio\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Bridge</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Bridge\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Esplora</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Esplora\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Ethernet</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Ethernet\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Firmata</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Firmata\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\GSM</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\GSM\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\LiquidCrystal</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\LiquidCrystal\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\RobotIRremote</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\RobotIRremote\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Robot_Control</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Robot_Control\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Robot_Motor</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Robot_Motor\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Scheduler</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Scheduler\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\SD</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\SD\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Servo</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Servo\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\SpacebrewYun</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\SpacebrewYun\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Stepper</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Stepper\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Temboo</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Temboo\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\TFT</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\TFT\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\USBHost</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\USBHost\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\WiFi</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\WiFi\utility</Value>
+            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino</Value>
+            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\standard</Value>
+            <Value>c:\Program Files (x86)\Arduino\libraries</Value>
+            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries</Value>
+            <Value>C:\Program Files (x86)\Visual Micro\Visual Micro for Arduino\Micro Platforms\default\debuggers</Value>
+            <Value>e:\Dropbox\Projects\libraries</Value>
             <Value>c:\program files (x86)\arduino\hardware\tools\avr\avr\include\</Value>
             <Value>c:\program files (x86)\arduino\hardware\tools\avr\avr\include\avr\</Value>
             <Value>c:\program files (x86)\arduino\hardware\tools\avr\avr\</Value>
@@ -183,122 +84,23 @@
         <avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>
         <avrgcccpp.compiler.symbols.DefSymbols>
           <ListValues>
-            <Value>__AVR_ATmega2560__</Value>
+            <Value>__AVR_ATmega328p__</Value>
+            <Value>__AVR_ATmega328P__</Value>
             <Value>ARDUINO=101</Value>
             <Value>ARDUINO_MAIN</Value>
-            <Value>F_CPU=16000000L</Value>
+            <Value>F_CPU=8000000L</Value>
             <Value>__AVR__</Value>
             <Value>__cplusplus</Value>
           </ListValues>
         </avrgcccpp.compiler.symbols.DefSymbols>
         <avrgcccpp.compiler.directories.IncludePaths>
           <ListValues>
-            <Value>c:\Program Files (x86)\arduino\hardware\arduino\avr\cores\arduino</Value>
-            <Value>c:\Program Files (x86)\arduino\hardware\arduino\avr\variants\mega</Value>
-            <Value>e:\Dropbox\Projects\libraries\Adafruit_Sensor</Value>
-            <Value>e:\Dropbox\Projects\libraries\Adafruit_Sensor\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\BH1750FVI</Value>
-            <Value>e:\Dropbox\Projects\libraries\BH1750FVI\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\DallasTemperature</Value>
-            <Value>e:\Dropbox\Projects\libraries\DallasTemperature\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\DHT</Value>
-            <Value>e:\Dropbox\Projects\libraries\DHT\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\DS3231</Value>
-            <Value>e:\Dropbox\Projects\libraries\DS3231\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\EEPROM</Value>
-            <Value>e:\Dropbox\Projects\libraries\EEPROM\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\EmonLib</Value>
-            <Value>e:\Dropbox\Projects\libraries\EmonLib\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\Fat16</Value>
-            <Value>e:\Dropbox\Projects\libraries\Fat16\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\HTU21D</Value>
-            <Value>e:\Dropbox\Projects\libraries\HTU21D\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\INA209</Value>
-            <Value>e:\Dropbox\Projects\libraries\INA209\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\Mirf</Value>
-            <Value>e:\Dropbox\Projects\libraries\Mirf\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\MLX90614</Value>
-            <Value>e:\Dropbox\Projects\libraries\MLX90614\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\NewPing</Value>
-            <Value>e:\Dropbox\Projects\libraries\NewPing\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\OneWire</Value>
-            <Value>e:\Dropbox\Projects\libraries\OneWire\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\Ping</Value>
-            <Value>e:\Dropbox\Projects\libraries\Ping\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\RF24</Value>
-            <Value>e:\Dropbox\Projects\libraries\RF24\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\RgbStrip</Value>
-            <Value>e:\Dropbox\Projects\libraries\RgbStrip\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\SD</Value>
-            <Value>e:\Dropbox\Projects\libraries\SD\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\SdFat</Value>
-            <Value>e:\Dropbox\Projects\libraries\SdFat\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\SeeedStalkerBattery</Value>
-            <Value>e:\Dropbox\Projects\libraries\SeeedStalkerBattery\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\SFE_TSL2561</Value>
-            <Value>e:\Dropbox\Projects\libraries\SFE_TSL2561\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\SHT15</Value>
-            <Value>e:\Dropbox\Projects\libraries\SHT15\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\SimpleTimer</Value>
-            <Value>e:\Dropbox\Projects\libraries\SimpleTimer\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\SPI85</Value>
-            <Value>e:\Dropbox\Projects\libraries\SPI85\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\Timer</Value>
-            <Value>e:\Dropbox\Projects\libraries\Timer\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\Timer1</Value>
-            <Value>e:\Dropbox\Projects\libraries\Timer1\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TimerThree</Value>
-            <Value>e:\Dropbox\Projects\libraries\TimerThree\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TinyRF24</Value>
-            <Value>e:\Dropbox\Projects\libraries\TinyRF24\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TinySPI</Value>
-            <Value>e:\Dropbox\Projects\libraries\TinySPI\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TM1638</Value>
-            <Value>e:\Dropbox\Projects\libraries\TM1638\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TMP006</Value>
-            <Value>e:\Dropbox\Projects\libraries\TMP006\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TSL2561</Value>
-            <Value>e:\Dropbox\Projects\libraries\TSL2561\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\XBee</Value>
-            <Value>e:\Dropbox\Projects\libraries\XBee\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Audio</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Audio\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Bridge</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Bridge\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Esplora</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Esplora\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Ethernet</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Ethernet\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Firmata</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Firmata\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\GSM</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\GSM\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\LiquidCrystal</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\LiquidCrystal\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\RobotIRremote</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\RobotIRremote\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Robot_Control</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Robot_Control\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Robot_Motor</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Robot_Motor\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Scheduler</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Scheduler\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\SD</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\SD\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Servo</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Servo\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\SpacebrewYun</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\SpacebrewYun\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Stepper</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Stepper\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Temboo</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Temboo\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\TFT</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\TFT\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\USBHost</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\USBHost\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\WiFi</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\WiFi\utility</Value>
+            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino</Value>
+            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\standard</Value>
+            <Value>c:\Program Files (x86)\Arduino\libraries</Value>
+            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries</Value>
+            <Value>C:\Program Files (x86)\Visual Micro\Visual Micro for Arduino\Micro Platforms\default\debuggers</Value>
+            <Value>e:\Dropbox\Projects\libraries</Value>
             <Value>c:\program files (x86)\arduino\hardware\tools\avr\avr\include\</Value>
             <Value>c:\program files (x86)\arduino\hardware\tools\avr\avr\include\avr\</Value>
             <Value>c:\program files (x86)\arduino\hardware\tools\avr\avr\</Value>
@@ -319,45 +121,67 @@
     </ToolchainSettings>
     <VisualMicroSettings>
       <VisualMicroSettings>
-        <arduino.board.name>mega_atmega2560</arduino.board.name>
-        <arduino.board.desc>Arduino Mega or Mega 2560 w/ ATmega2560 (Mega 2560)</arduino.board.desc>
-        <arduino.board.property_bag>name=Arduino Mega or Mega 2560 w/ ATmega2560 (Mega 2560)
-vid.0=0x2341
-pid.0=0x0010
-vid.1=0x2341
-pid.1=0x0042
+        <arduino.board.name>pro_8MHzatmega328</arduino.board.name>
+        <arduino.board.desc>Arduino Pro or Pro Mini w/ ATmega328 (3.3V, 8 MHz)</arduino.board.desc>
+        <arduino.board.property_bag>name=Arduino Pro or Pro Mini w/ ATmega328 (3.3V, 8 MHz)
 upload.tool=avrdude
-upload.maximum_data_size=8192
+upload.protocol=arduino
 bootloader.tool=avrdude
-bootloader.low_fuses=0xFF
 bootloader.unlock_bits=0x3F
 bootloader.lock_bits=0x0F
-build.f_cpu=16000000L
+build.board=AVR_PRO
 build.core=arduino
-build.variant=mega
-build.board=AVR_MEGA2560
-menu.cpu.atmega2560=ATmega2560 (Mega 2560)
-menu.cpu.atmega2560.upload.protocol=wiring
-menu.cpu.atmega2560.upload.maximum_size=258048
-menu.cpu.atmega2560.upload.speed=115200
-menu.cpu.atmega2560.bootloader.high_fuses=0xD8
-menu.cpu.atmega2560.bootloader.extended_fuses=0xFD
-menu.cpu.atmega2560.bootloader.file=stk500v2/stk500boot_v2_mega2560.hex
-menu.cpu.atmega2560.build.mcu=atmega2560
-menu.cpu.atmega2560.build.board=AVR_MEGA2560
-menu.cpu.atmega1280=ATmega1280
-menu.cpu.atmega1280.upload.protocol=arduino
-menu.cpu.atmega1280.upload.maximum_size=126976
-menu.cpu.atmega1280.upload.speed=57600
-menu.cpu.atmega1280.bootloader.high_fuses=0xDA
-menu.cpu.atmega1280.bootloader.extended_fuses=0xF5
-menu.cpu.atmega1280.bootloader.file=atmega/ATmegaBOOT_168_atmega1280.hex
-menu.cpu.atmega1280.build.mcu=atmega1280
-menu.cpu.atmega1280.build.board=AVR_MEGA
-runtime.ide.path=c:\Program Files (x86)\arduino
-build.system.path=c:\Program Files (x86)\arduino\hardware\arduino\avr\system
-runtime.ide.version=150
-originalid=mega
+build.variant=standard
+menu.cpu.16MHzatmega328=ATmega328 (5V, 16 MHz)
+menu.cpu.16MHzatmega328.upload.maximum_size=30720
+menu.cpu.16MHzatmega328.upload.maximum_data_size=2048
+menu.cpu.16MHzatmega328.upload.speed=57600
+menu.cpu.16MHzatmega328.bootloader.low_fuses=0xFF
+menu.cpu.16MHzatmega328.bootloader.high_fuses=0xDA
+menu.cpu.16MHzatmega328.bootloader.extended_fuses=0x05
+menu.cpu.16MHzatmega328.bootloader.file=atmega/ATmegaBOOT_168_atmega328.hex
+menu.cpu.16MHzatmega328.build.mcu=atmega328p
+menu.cpu.16MHzatmega328.build.f_cpu=16000000L
+menu.cpu.8MHzatmega328=ATmega328 (3.3V, 8 MHz)
+menu.cpu.8MHzatmega328.upload.maximum_size=30720
+menu.cpu.8MHzatmega328.upload.maximum_data_size=2048
+menu.cpu.8MHzatmega328.upload.speed=57600
+menu.cpu.8MHzatmega328.bootloader.low_fuses=0xFF
+menu.cpu.8MHzatmega328.bootloader.high_fuses=0xDA
+menu.cpu.8MHzatmega328.bootloader.extended_fuses=0x05
+menu.cpu.8MHzatmega328.bootloader.file=atmega/ATmegaBOOT_168_atmega328_pro_8MHz.hex
+menu.cpu.8MHzatmega328.build.mcu=atmega328p
+menu.cpu.8MHzatmega328.build.f_cpu=8000000L
+menu.cpu.16MHzatmega168=ATmega168 (5V, 16 MHz)
+menu.cpu.16MHzatmega168.upload.maximum_size=14336
+menu.cpu.16MHzatmega168.upload.maximum_data_size=1024
+menu.cpu.16MHzatmega168.upload.speed=19200
+menu.cpu.16MHzatmega168.bootloader.low_fuses=0xff
+menu.cpu.16MHzatmega168.bootloader.high_fuses=0xdd
+menu.cpu.16MHzatmega168.bootloader.extended_fuses=0x00
+menu.cpu.16MHzatmega168.bootloader.file=atmega/ATmegaBOOT_168_diecimila.hex
+menu.cpu.16MHzatmega168.build.mcu=atmega168
+menu.cpu.16MHzatmega168.build.f_cpu=16000000L
+menu.cpu.8MHzatmega168=ATmega168 (3.3V, 8 MHz)
+menu.cpu.8MHzatmega168.upload.maximum_size=14336
+menu.cpu.8MHzatmega168.upload.maximum_data_size=1024
+menu.cpu.8MHzatmega168.upload.speed=19200
+menu.cpu.8MHzatmega168.bootloader.low_fuses=0xc6
+menu.cpu.8MHzatmega168.bootloader.high_fuses=0xdd
+menu.cpu.8MHzatmega168.bootloader.extended_fuses=0x00
+menu.cpu.8MHzatmega168.bootloader.file=atmega/ATmegaBOOT_168_pro_8MHz.hex
+menu.cpu.8MHzatmega168.build.mcu=atmega168
+menu.cpu.8MHzatmega168.build.f_cpu=8000000L
+runtime.ide.path=c:\Program Files (x86)\Arduino
+build.system.path=c:\Program Files (x86)\Arduino\hardware\arduino\avr\system
+runtime.ide.version=156
+originalid=pro
+tools.atprogram.cmd.path=%AVRSTUDIO_EXE_PATH%\atbackend\atprogram
+tools.atprogram.cmd.setwinpath=true
+tools.atprogram.program.params.verbose=-v
+tools.atprogram.program.params.quiet=-q
+tools.atprogram.program.pattern="{cmd.path}" -d {build.mcu} {program.verbose} {program.extra_params} program -c -f "{build.path}\{build.project_name}.hex"
+tools.atprogram.program.xpattern="{cmd.path}" {AVRSTUDIO_BACKEND_CONNECTION} -d {build.mcu} {program.verbose} {program.extra_params} program -c -f "{build.path}\{build.project_name}.hex"
 version=1.5.6
 compiler.c.cmd=avr-gcc
 compiler.c.flags=-c -g -Os -w -ffunction-sections -fdata-sections -MMD
@@ -404,13 +228,16 @@ tools.avrdude.bootloader.params.quiet=-q -q
 tools.avrdude.bootloader.pattern="{cmd.path}" "-C{config.path}" {bootloader.verbose} -p{build.mcu} -c{protocol} {program.extra_params} "-Uflash:w:{runtime.platform.path}/bootloaders/{bootloader.file}:i" -Ulock:w:{bootloader.lock_bits}:m
 build.usb_manufacturer=
 build.usb_flags=-DUSB_VID={build.vid} -DUSB_PID={build.pid} '-DUSB_MANUFACTURER={build.usb_manufacturer}' '-DUSB_PRODUCT={build.usb_product}'
-upload.protocol=wiring
-upload.maximum_size=258048
-upload.speed=115200
-bootloader.high_fuses=0xD8
-bootloader.extended_fuses=0xFD
-bootloader.file=stk500v2/stk500boot_v2_mega2560.hex
-build.mcu=atmega2560
+vm.platform.root.path=C:\Program Files (x86)\Visual Micro\Visual Micro for Arduino\Micro Platforms\arduino15x
+upload.maximum_size=30720
+upload.maximum_data_size=2048
+upload.speed=57600
+bootloader.low_fuses=0xFF
+bootloader.high_fuses=0xDA
+bootloader.extended_fuses=0x05
+bootloader.file=atmega/ATmegaBOOT_168_atmega328_pro_8MHz.hex
+build.mcu=atmega328p
+build.f_cpu=8000000L
 vm.core.include=arduino.h
 ide.hint=Arduino 1.5 Ide
 ide.location.key=Arduino15x
@@ -425,7 +252,6 @@ ide.default.platform=avr
 ide.multiplatform=true
 ide.includes=arduino.h
 ide.platformswithoutpackage=false
-ide.sketchfolder.platforms.exclude=avr;sam
 ide.includes.fallback=wprogram.h
 ide.extension=ino
 ide.extension.fallback=pde
@@ -435,22 +261,44 @@ ide.hosts=atmel
 ide.url=http://arduino.cc/en/Main/Software
 vm.debug=true
 software=ARDUINO
+ssh.user.name=root
+ssh.user.default.password=arduino
+ssh.host.wwwfiles.path=/www/sd
 ide.appid=arduino15x
 location.sketchbook=e:\Dropbox\Projects\
-vm.boardsource.path=c:\Program Files (x86)\arduino\hardware\arduino\avr
+vm.boardsource.path=c:\Program Files (x86)\Arduino\hardware\arduino\avr
 vm.platformname.name=avr
 build.arch=AVR
+vm.runtime.compiler.showwarnings=false
+compiler.path=c:\Program Files (x86)\Arduino\hardware\tools\avr\bin\
+includes= -I"c:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino"  -I"c:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\standard"  -I"e:\Dropbox\Projects\libraries\EmonLib"  -I"c:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI"  -I"e:\Dropbox\Projects\libraries\SD"  -I"e:\Dropbox\Projects\libraries\XBee"  -I"c:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire"  -I"e:\Dropbox\Projects\libraries\OneWire"  -I"e:\Dropbox\Projects\libraries\DallasTemperature"  -I"e:\Dropbox\Projects\libraries\Adafruit_Sensor"  -I"e:\Dropbox\Projects\libraries\HTU21D"  -I"e:\Dropbox\Projects\libraries\DS3231"  -I"e:\Dropbox\Projects\libraries\TMP006"  -I"e:\Dropbox\Projects\libraries\TSL2561"  -I"e:\Dropbox\Projects\libraries\SeeedStalkerBattery"  -I"c:\Program Files (x86)\Arduino\libraries"  -I"c:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries"  -I"C:\Program Files (x86)\Visual Micro\Visual Micro for Arduino\Micro Platforms\default\debuggers"  -I"e:\Dropbox\Projects\libraries"  -I"e:\Dropbox\Projects\libraries\SD\utility" -I"c:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire\utility"
+build.path=C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328
+build.project_name=Stalkerv20
+build.variant.path=c:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\standard
+archive_file=core.a
+object_file=C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\SeeedStalkerBattery\Battery.cpp.o
+source_file=e:\Dropbox\Projects\libraries\SeeedStalkerBattery\Battery.cpp
+build.architecture=avr
+vmresolved.compiler.path=c:\Program Files (x86)\Arduino\hardware\tools\avr\bin\
+vmresolved.tools.path=c:\Program Files (x86)\Arduino\hardware\tools\avr
+object_files="C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\Stalkerv20.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\EmonLib\EmonLib.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\SPI\SPI.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\SD\File.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\SD\SD.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\SD\utility\Sd2Card.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\SD\utility\SdFile.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\SD\utility\SdVolume.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\XBee\XBee.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\Wire\Wire.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\Wire\utility\twi.c.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\OneWire\OneWire.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\DallasTemperature\DallasTemperature.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\Adafruit_Sensor\Adafruit_Sensor.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\HTU21D\HTU21D.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\DS3231\DS3231.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\TMP006\Adafruit_TMP006.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\TSL2561\Adafruit_TSL2561_U.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\SeeedStalkerBattery\Battery.cpp.o" 
+upload.verbose=-q -q
+path=c:\Program Files (x86)\Arduino\hardware\tools
+cmd.path={runtime.ide.path}/hardware/tools/avr/bin/avrdude
+config.path=c:\Program Files (x86)\Arduino\hardware/tools/avr/etc/avrdude.conf
+serial.port.file=COM5
+serial.port=COM5
 </arduino.board.property_bag>
-        <arduino.build.mcu>atmega2560</arduino.build.mcu>
-        <arduino.build.f_cpu>16000000L</arduino.build.f_cpu>
+        <arduino.build.mcu>atmega328p</arduino.build.mcu>
+        <arduino.build.f_cpu>8000000L</arduino.build.f_cpu>
         <arduino.build.core>arduino</arduino.build.core>
-        <arduino.upload.protocol>wiring</arduino.upload.protocol>
-        <arduino.upload.speed>115200</arduino.upload.speed>
-        <arduino.upload.maximum_size>258048</arduino.upload.maximum_size>
+        <arduino.upload.protocol>arduino</arduino.upload.protocol>
+        <arduino.upload.speed>57600</arduino.upload.speed>
+        <arduino.upload.maximum_size>30720</arduino.upload.maximum_size>
         <visualmicro.application.name>arduino15x</visualmicro.application.name>
         <visualmicro.package.name>arduino</visualmicro.package.name>
         <visualmicro.platform.name>avr</visualmicro.platform.name>
-        <arduino.upload.port>COM7</arduino.upload.port>
+        <arduino.upload.port>COM5</arduino.upload.port>
       </VisualMicroSettings>
     </VisualMicroSettings>
   </PropertyGroup>
@@ -466,122 +314,23 @@ build.arch=AVR
         <avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcc.compiler.general.ChangeDefaultBitFieldUnsigned>
         <avrgcc.compiler.symbols.DefSymbols>
           <ListValues>
-            <Value>__AVR_ATmega2560__</Value>
+            <Value>__AVR_ATmega328p__</Value>
+            <Value>__AVR_ATmega328P__</Value>
             <Value>ARDUINO=101</Value>
             <Value>ARDUINO_MAIN</Value>
-            <Value>F_CPU=16000000L</Value>
+            <Value>F_CPU=8000000L</Value>
             <Value>__AVR__</Value>
             <Value>__cplusplus</Value>
           </ListValues>
         </avrgcc.compiler.symbols.DefSymbols>
         <avrgcc.compiler.directories.IncludePaths>
           <ListValues>
-            <Value>c:\Program Files (x86)\arduino\hardware\arduino\avr\cores\arduino</Value>
-            <Value>c:\Program Files (x86)\arduino\hardware\arduino\avr\variants\mega</Value>
-            <Value>e:\Dropbox\Projects\libraries\Adafruit_Sensor</Value>
-            <Value>e:\Dropbox\Projects\libraries\Adafruit_Sensor\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\BH1750FVI</Value>
-            <Value>e:\Dropbox\Projects\libraries\BH1750FVI\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\DallasTemperature</Value>
-            <Value>e:\Dropbox\Projects\libraries\DallasTemperature\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\DHT</Value>
-            <Value>e:\Dropbox\Projects\libraries\DHT\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\DS3231</Value>
-            <Value>e:\Dropbox\Projects\libraries\DS3231\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\EEPROM</Value>
-            <Value>e:\Dropbox\Projects\libraries\EEPROM\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\EmonLib</Value>
-            <Value>e:\Dropbox\Projects\libraries\EmonLib\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\Fat16</Value>
-            <Value>e:\Dropbox\Projects\libraries\Fat16\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\HTU21D</Value>
-            <Value>e:\Dropbox\Projects\libraries\HTU21D\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\INA209</Value>
-            <Value>e:\Dropbox\Projects\libraries\INA209\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\Mirf</Value>
-            <Value>e:\Dropbox\Projects\libraries\Mirf\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\MLX90614</Value>
-            <Value>e:\Dropbox\Projects\libraries\MLX90614\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\NewPing</Value>
-            <Value>e:\Dropbox\Projects\libraries\NewPing\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\OneWire</Value>
-            <Value>e:\Dropbox\Projects\libraries\OneWire\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\Ping</Value>
-            <Value>e:\Dropbox\Projects\libraries\Ping\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\RF24</Value>
-            <Value>e:\Dropbox\Projects\libraries\RF24\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\RgbStrip</Value>
-            <Value>e:\Dropbox\Projects\libraries\RgbStrip\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\SD</Value>
-            <Value>e:\Dropbox\Projects\libraries\SD\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\SdFat</Value>
-            <Value>e:\Dropbox\Projects\libraries\SdFat\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\SeeedStalkerBattery</Value>
-            <Value>e:\Dropbox\Projects\libraries\SeeedStalkerBattery\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\SFE_TSL2561</Value>
-            <Value>e:\Dropbox\Projects\libraries\SFE_TSL2561\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\SHT15</Value>
-            <Value>e:\Dropbox\Projects\libraries\SHT15\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\SimpleTimer</Value>
-            <Value>e:\Dropbox\Projects\libraries\SimpleTimer\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\SPI85</Value>
-            <Value>e:\Dropbox\Projects\libraries\SPI85\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\Timer</Value>
-            <Value>e:\Dropbox\Projects\libraries\Timer\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\Timer1</Value>
-            <Value>e:\Dropbox\Projects\libraries\Timer1\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TimerThree</Value>
-            <Value>e:\Dropbox\Projects\libraries\TimerThree\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TinyRF24</Value>
-            <Value>e:\Dropbox\Projects\libraries\TinyRF24\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TinySPI</Value>
-            <Value>e:\Dropbox\Projects\libraries\TinySPI\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TM1638</Value>
-            <Value>e:\Dropbox\Projects\libraries\TM1638\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TMP006</Value>
-            <Value>e:\Dropbox\Projects\libraries\TMP006\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TSL2561</Value>
-            <Value>e:\Dropbox\Projects\libraries\TSL2561\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\XBee</Value>
-            <Value>e:\Dropbox\Projects\libraries\XBee\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Audio</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Audio\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Bridge</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Bridge\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Esplora</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Esplora\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Ethernet</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Ethernet\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Firmata</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Firmata\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\GSM</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\GSM\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\LiquidCrystal</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\LiquidCrystal\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\RobotIRremote</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\RobotIRremote\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Robot_Control</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Robot_Control\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Robot_Motor</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Robot_Motor\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Scheduler</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Scheduler\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\SD</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\SD\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Servo</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Servo\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\SpacebrewYun</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\SpacebrewYun\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Stepper</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Stepper\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Temboo</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Temboo\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\TFT</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\TFT\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\USBHost</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\USBHost\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\WiFi</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\WiFi\utility</Value>
+            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino</Value>
+            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\standard</Value>
+            <Value>c:\Program Files (x86)\Arduino\libraries</Value>
+            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries</Value>
+            <Value>C:\Program Files (x86)\Visual Micro\Visual Micro for Arduino\Micro Platforms\default\debuggers</Value>
+            <Value>e:\Dropbox\Projects\libraries</Value>
             <Value>c:\program files (x86)\arduino\hardware\tools\avr\avr\include\</Value>
             <Value>c:\program files (x86)\arduino\hardware\tools\avr\avr\include\avr\</Value>
             <Value>c:\program files (x86)\arduino\hardware\tools\avr\avr\</Value>
@@ -598,122 +347,23 @@ build.arch=AVR
         <avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>True</avrgcccpp.compiler.general.ChangeDefaultBitFieldUnsigned>
         <avrgcccpp.compiler.symbols.DefSymbols>
           <ListValues>
-            <Value>__AVR_ATmega2560__</Value>
+            <Value>__AVR_ATmega328p__</Value>
+            <Value>__AVR_ATmega328P__</Value>
             <Value>ARDUINO=101</Value>
             <Value>ARDUINO_MAIN</Value>
-            <Value>F_CPU=16000000L</Value>
+            <Value>F_CPU=8000000L</Value>
             <Value>__AVR__</Value>
             <Value>__cplusplus</Value>
           </ListValues>
         </avrgcccpp.compiler.symbols.DefSymbols>
         <avrgcccpp.compiler.directories.IncludePaths>
           <ListValues>
-            <Value>c:\Program Files (x86)\arduino\hardware\arduino\avr\cores\arduino</Value>
-            <Value>c:\Program Files (x86)\arduino\hardware\arduino\avr\variants\mega</Value>
-            <Value>e:\Dropbox\Projects\libraries\Adafruit_Sensor</Value>
-            <Value>e:\Dropbox\Projects\libraries\Adafruit_Sensor\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\BH1750FVI</Value>
-            <Value>e:\Dropbox\Projects\libraries\BH1750FVI\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\DallasTemperature</Value>
-            <Value>e:\Dropbox\Projects\libraries\DallasTemperature\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\DHT</Value>
-            <Value>e:\Dropbox\Projects\libraries\DHT\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\DS3231</Value>
-            <Value>e:\Dropbox\Projects\libraries\DS3231\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\EEPROM</Value>
-            <Value>e:\Dropbox\Projects\libraries\EEPROM\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\EmonLib</Value>
-            <Value>e:\Dropbox\Projects\libraries\EmonLib\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\Fat16</Value>
-            <Value>e:\Dropbox\Projects\libraries\Fat16\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\HTU21D</Value>
-            <Value>e:\Dropbox\Projects\libraries\HTU21D\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\INA209</Value>
-            <Value>e:\Dropbox\Projects\libraries\INA209\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\Mirf</Value>
-            <Value>e:\Dropbox\Projects\libraries\Mirf\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\MLX90614</Value>
-            <Value>e:\Dropbox\Projects\libraries\MLX90614\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\NewPing</Value>
-            <Value>e:\Dropbox\Projects\libraries\NewPing\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\OneWire</Value>
-            <Value>e:\Dropbox\Projects\libraries\OneWire\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\Ping</Value>
-            <Value>e:\Dropbox\Projects\libraries\Ping\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\RF24</Value>
-            <Value>e:\Dropbox\Projects\libraries\RF24\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\RgbStrip</Value>
-            <Value>e:\Dropbox\Projects\libraries\RgbStrip\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\SD</Value>
-            <Value>e:\Dropbox\Projects\libraries\SD\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\SdFat</Value>
-            <Value>e:\Dropbox\Projects\libraries\SdFat\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\SeeedStalkerBattery</Value>
-            <Value>e:\Dropbox\Projects\libraries\SeeedStalkerBattery\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\SFE_TSL2561</Value>
-            <Value>e:\Dropbox\Projects\libraries\SFE_TSL2561\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\SHT15</Value>
-            <Value>e:\Dropbox\Projects\libraries\SHT15\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\SimpleTimer</Value>
-            <Value>e:\Dropbox\Projects\libraries\SimpleTimer\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\SPI85</Value>
-            <Value>e:\Dropbox\Projects\libraries\SPI85\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\Timer</Value>
-            <Value>e:\Dropbox\Projects\libraries\Timer\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\Timer1</Value>
-            <Value>e:\Dropbox\Projects\libraries\Timer1\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TimerThree</Value>
-            <Value>e:\Dropbox\Projects\libraries\TimerThree\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TinyRF24</Value>
-            <Value>e:\Dropbox\Projects\libraries\TinyRF24\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TinySPI</Value>
-            <Value>e:\Dropbox\Projects\libraries\TinySPI\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TM1638</Value>
-            <Value>e:\Dropbox\Projects\libraries\TM1638\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TMP006</Value>
-            <Value>e:\Dropbox\Projects\libraries\TMP006\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TSL2561</Value>
-            <Value>e:\Dropbox\Projects\libraries\TSL2561\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\XBee</Value>
-            <Value>e:\Dropbox\Projects\libraries\XBee\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Audio</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Audio\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Bridge</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Bridge\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Esplora</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Esplora\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Ethernet</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Ethernet\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Firmata</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Firmata\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\GSM</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\GSM\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\LiquidCrystal</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\LiquidCrystal\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\RobotIRremote</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\RobotIRremote\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Robot_Control</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Robot_Control\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Robot_Motor</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Robot_Motor\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Scheduler</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Scheduler\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\SD</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\SD\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Servo</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Servo\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\SpacebrewYun</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\SpacebrewYun\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Stepper</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Stepper\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Temboo</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\Temboo\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\TFT</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\TFT\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\USBHost</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\USBHost\utility</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\WiFi</Value>
-            <Value>c:\Program Files (x86)\arduino\libraries\WiFi\utility</Value>
+            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino</Value>
+            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\standard</Value>
+            <Value>c:\Program Files (x86)\Arduino\libraries</Value>
+            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries</Value>
+            <Value>C:\Program Files (x86)\Visual Micro\Visual Micro for Arduino\Micro Platforms\default\debuggers</Value>
+            <Value>e:\Dropbox\Projects\libraries</Value>
             <Value>c:\program files (x86)\arduino\hardware\tools\avr\avr\include\</Value>
             <Value>c:\program files (x86)\arduino\hardware\tools\avr\avr\include\avr\</Value>
             <Value>c:\program files (x86)\arduino\hardware\tools\avr\avr\</Value>
@@ -734,45 +384,67 @@ build.arch=AVR
     </ToolchainSettings>
     <VisualMicroSettings>
       <VisualMicroSettings>
-        <arduino.board.name>mega_atmega2560</arduino.board.name>
-        <arduino.board.desc>Arduino Mega or Mega 2560 w/ ATmega2560 (Mega 2560)</arduino.board.desc>
-        <arduino.board.property_bag>name=Arduino Mega or Mega 2560 w/ ATmega2560 (Mega 2560)
-vid.0=0x2341
-pid.0=0x0010
-vid.1=0x2341
-pid.1=0x0042
+        <arduino.board.name>pro_8MHzatmega328</arduino.board.name>
+        <arduino.board.desc>Arduino Pro or Pro Mini w/ ATmega328 (3.3V, 8 MHz)</arduino.board.desc>
+        <arduino.board.property_bag>name=Arduino Pro or Pro Mini w/ ATmega328 (3.3V, 8 MHz)
 upload.tool=avrdude
-upload.maximum_data_size=8192
+upload.protocol=arduino
 bootloader.tool=avrdude
-bootloader.low_fuses=0xFF
 bootloader.unlock_bits=0x3F
 bootloader.lock_bits=0x0F
-build.f_cpu=16000000L
+build.board=AVR_PRO
 build.core=arduino
-build.variant=mega
-build.board=AVR_MEGA2560
-menu.cpu.atmega2560=ATmega2560 (Mega 2560)
-menu.cpu.atmega2560.upload.protocol=wiring
-menu.cpu.atmega2560.upload.maximum_size=258048
-menu.cpu.atmega2560.upload.speed=115200
-menu.cpu.atmega2560.bootloader.high_fuses=0xD8
-menu.cpu.atmega2560.bootloader.extended_fuses=0xFD
-menu.cpu.atmega2560.bootloader.file=stk500v2/stk500boot_v2_mega2560.hex
-menu.cpu.atmega2560.build.mcu=atmega2560
-menu.cpu.atmega2560.build.board=AVR_MEGA2560
-menu.cpu.atmega1280=ATmega1280
-menu.cpu.atmega1280.upload.protocol=arduino
-menu.cpu.atmega1280.upload.maximum_size=126976
-menu.cpu.atmega1280.upload.speed=57600
-menu.cpu.atmega1280.bootloader.high_fuses=0xDA
-menu.cpu.atmega1280.bootloader.extended_fuses=0xF5
-menu.cpu.atmega1280.bootloader.file=atmega/ATmegaBOOT_168_atmega1280.hex
-menu.cpu.atmega1280.build.mcu=atmega1280
-menu.cpu.atmega1280.build.board=AVR_MEGA
-runtime.ide.path=c:\Program Files (x86)\arduino
-build.system.path=c:\Program Files (x86)\arduino\hardware\arduino\avr\system
-runtime.ide.version=150
-originalid=mega
+build.variant=standard
+menu.cpu.16MHzatmega328=ATmega328 (5V, 16 MHz)
+menu.cpu.16MHzatmega328.upload.maximum_size=30720
+menu.cpu.16MHzatmega328.upload.maximum_data_size=2048
+menu.cpu.16MHzatmega328.upload.speed=57600
+menu.cpu.16MHzatmega328.bootloader.low_fuses=0xFF
+menu.cpu.16MHzatmega328.bootloader.high_fuses=0xDA
+menu.cpu.16MHzatmega328.bootloader.extended_fuses=0x05
+menu.cpu.16MHzatmega328.bootloader.file=atmega/ATmegaBOOT_168_atmega328.hex
+menu.cpu.16MHzatmega328.build.mcu=atmega328p
+menu.cpu.16MHzatmega328.build.f_cpu=16000000L
+menu.cpu.8MHzatmega328=ATmega328 (3.3V, 8 MHz)
+menu.cpu.8MHzatmega328.upload.maximum_size=30720
+menu.cpu.8MHzatmega328.upload.maximum_data_size=2048
+menu.cpu.8MHzatmega328.upload.speed=57600
+menu.cpu.8MHzatmega328.bootloader.low_fuses=0xFF
+menu.cpu.8MHzatmega328.bootloader.high_fuses=0xDA
+menu.cpu.8MHzatmega328.bootloader.extended_fuses=0x05
+menu.cpu.8MHzatmega328.bootloader.file=atmega/ATmegaBOOT_168_atmega328_pro_8MHz.hex
+menu.cpu.8MHzatmega328.build.mcu=atmega328p
+menu.cpu.8MHzatmega328.build.f_cpu=8000000L
+menu.cpu.16MHzatmega168=ATmega168 (5V, 16 MHz)
+menu.cpu.16MHzatmega168.upload.maximum_size=14336
+menu.cpu.16MHzatmega168.upload.maximum_data_size=1024
+menu.cpu.16MHzatmega168.upload.speed=19200
+menu.cpu.16MHzatmega168.bootloader.low_fuses=0xff
+menu.cpu.16MHzatmega168.bootloader.high_fuses=0xdd
+menu.cpu.16MHzatmega168.bootloader.extended_fuses=0x00
+menu.cpu.16MHzatmega168.bootloader.file=atmega/ATmegaBOOT_168_diecimila.hex
+menu.cpu.16MHzatmega168.build.mcu=atmega168
+menu.cpu.16MHzatmega168.build.f_cpu=16000000L
+menu.cpu.8MHzatmega168=ATmega168 (3.3V, 8 MHz)
+menu.cpu.8MHzatmega168.upload.maximum_size=14336
+menu.cpu.8MHzatmega168.upload.maximum_data_size=1024
+menu.cpu.8MHzatmega168.upload.speed=19200
+menu.cpu.8MHzatmega168.bootloader.low_fuses=0xc6
+menu.cpu.8MHzatmega168.bootloader.high_fuses=0xdd
+menu.cpu.8MHzatmega168.bootloader.extended_fuses=0x00
+menu.cpu.8MHzatmega168.bootloader.file=atmega/ATmegaBOOT_168_pro_8MHz.hex
+menu.cpu.8MHzatmega168.build.mcu=atmega168
+menu.cpu.8MHzatmega168.build.f_cpu=8000000L
+runtime.ide.path=c:\Program Files (x86)\Arduino
+build.system.path=c:\Program Files (x86)\Arduino\hardware\arduino\avr\system
+runtime.ide.version=156
+originalid=pro
+tools.atprogram.cmd.path=%AVRSTUDIO_EXE_PATH%\atbackend\atprogram
+tools.atprogram.cmd.setwinpath=true
+tools.atprogram.program.params.verbose=-v
+tools.atprogram.program.params.quiet=-q
+tools.atprogram.program.pattern="{cmd.path}" -d {build.mcu} {program.verbose} {program.extra_params} program -c -f "{build.path}\{build.project_name}.hex"
+tools.atprogram.program.xpattern="{cmd.path}" {AVRSTUDIO_BACKEND_CONNECTION} -d {build.mcu} {program.verbose} {program.extra_params} program -c -f "{build.path}\{build.project_name}.hex"
 version=1.5.6
 compiler.c.cmd=avr-gcc
 compiler.c.flags=-c -g -Os -w -ffunction-sections -fdata-sections -MMD
@@ -819,13 +491,16 @@ tools.avrdude.bootloader.params.quiet=-q -q
 tools.avrdude.bootloader.pattern="{cmd.path}" "-C{config.path}" {bootloader.verbose} -p{build.mcu} -c{protocol} {program.extra_params} "-Uflash:w:{runtime.platform.path}/bootloaders/{bootloader.file}:i" -Ulock:w:{bootloader.lock_bits}:m
 build.usb_manufacturer=
 build.usb_flags=-DUSB_VID={build.vid} -DUSB_PID={build.pid} '-DUSB_MANUFACTURER={build.usb_manufacturer}' '-DUSB_PRODUCT={build.usb_product}'
-upload.protocol=wiring
-upload.maximum_size=258048
-upload.speed=115200
-bootloader.high_fuses=0xD8
-bootloader.extended_fuses=0xFD
-bootloader.file=stk500v2/stk500boot_v2_mega2560.hex
-build.mcu=atmega2560
+vm.platform.root.path=C:\Program Files (x86)\Visual Micro\Visual Micro for Arduino\Micro Platforms\arduino15x
+upload.maximum_size=30720
+upload.maximum_data_size=2048
+upload.speed=57600
+bootloader.low_fuses=0xFF
+bootloader.high_fuses=0xDA
+bootloader.extended_fuses=0x05
+bootloader.file=atmega/ATmegaBOOT_168_atmega328_pro_8MHz.hex
+build.mcu=atmega328p
+build.f_cpu=8000000L
 vm.core.include=arduino.h
 ide.hint=Arduino 1.5 Ide
 ide.location.key=Arduino15x
@@ -840,7 +515,6 @@ ide.default.platform=avr
 ide.multiplatform=true
 ide.includes=arduino.h
 ide.platformswithoutpackage=false
-ide.sketchfolder.platforms.exclude=avr;sam
 ide.includes.fallback=wprogram.h
 ide.extension=ino
 ide.extension.fallback=pde
@@ -850,22 +524,44 @@ ide.hosts=atmel
 ide.url=http://arduino.cc/en/Main/Software
 vm.debug=true
 software=ARDUINO
+ssh.user.name=root
+ssh.user.default.password=arduino
+ssh.host.wwwfiles.path=/www/sd
 ide.appid=arduino15x
 location.sketchbook=e:\Dropbox\Projects\
-vm.boardsource.path=c:\Program Files (x86)\arduino\hardware\arduino\avr
+vm.boardsource.path=c:\Program Files (x86)\Arduino\hardware\arduino\avr
 vm.platformname.name=avr
 build.arch=AVR
+vm.runtime.compiler.showwarnings=false
+compiler.path=c:\Program Files (x86)\Arduino\hardware\tools\avr\bin\
+includes= -I"c:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino"  -I"c:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\standard"  -I"e:\Dropbox\Projects\libraries\EmonLib"  -I"c:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI"  -I"e:\Dropbox\Projects\libraries\SD"  -I"e:\Dropbox\Projects\libraries\XBee"  -I"c:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire"  -I"e:\Dropbox\Projects\libraries\OneWire"  -I"e:\Dropbox\Projects\libraries\DallasTemperature"  -I"e:\Dropbox\Projects\libraries\Adafruit_Sensor"  -I"e:\Dropbox\Projects\libraries\HTU21D"  -I"e:\Dropbox\Projects\libraries\DS3231"  -I"e:\Dropbox\Projects\libraries\TMP006"  -I"e:\Dropbox\Projects\libraries\TSL2561"  -I"e:\Dropbox\Projects\libraries\SeeedStalkerBattery"  -I"c:\Program Files (x86)\Arduino\libraries"  -I"c:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries"  -I"C:\Program Files (x86)\Visual Micro\Visual Micro for Arduino\Micro Platforms\default\debuggers"  -I"e:\Dropbox\Projects\libraries"  -I"e:\Dropbox\Projects\libraries\SD\utility" -I"c:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\Wire\utility"
+build.path=C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328
+build.project_name=Stalkerv20
+build.variant.path=c:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\standard
+archive_file=core.a
+object_file=C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\SeeedStalkerBattery\Battery.cpp.o
+source_file=e:\Dropbox\Projects\libraries\SeeedStalkerBattery\Battery.cpp
+build.architecture=avr
+vmresolved.compiler.path=c:\Program Files (x86)\Arduino\hardware\tools\avr\bin\
+vmresolved.tools.path=c:\Program Files (x86)\Arduino\hardware\tools\avr
+object_files="C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\Stalkerv20.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\EmonLib\EmonLib.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\SPI\SPI.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\SD\File.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\SD\SD.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\SD\utility\Sd2Card.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\SD\utility\SdFile.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\SD\utility\SdVolume.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\XBee\XBee.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\Wire\Wire.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\Wire\utility\twi.c.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\OneWire\OneWire.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\DallasTemperature\DallasTemperature.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\Adafruit_Sensor\Adafruit_Sensor.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\HTU21D\HTU21D.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\DS3231\DS3231.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\TMP006\Adafruit_TMP006.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\TSL2561\Adafruit_TSL2561_U.cpp.o" "C:\Users\Leenix\AppData\Local\VMicro\Arduino\Builds\Stalkerv20\pro_8MHzatmega328\SeeedStalkerBattery\Battery.cpp.o" 
+upload.verbose=-q -q
+path=c:\Program Files (x86)\Arduino\hardware\tools
+cmd.path={runtime.ide.path}/hardware/tools/avr/bin/avrdude
+config.path=c:\Program Files (x86)\Arduino\hardware/tools/avr/etc/avrdude.conf
+serial.port.file=COM5
+serial.port=COM5
 </arduino.board.property_bag>
-        <arduino.build.mcu>atmega2560</arduino.build.mcu>
-        <arduino.build.f_cpu>16000000L</arduino.build.f_cpu>
+        <arduino.build.mcu>atmega328p</arduino.build.mcu>
+        <arduino.build.f_cpu>8000000L</arduino.build.f_cpu>
         <arduino.build.core>arduino</arduino.build.core>
-        <arduino.upload.protocol>wiring</arduino.upload.protocol>
-        <arduino.upload.speed>115200</arduino.upload.speed>
-        <arduino.upload.maximum_size>258048</arduino.upload.maximum_size>
+        <arduino.upload.protocol>arduino</arduino.upload.protocol>
+        <arduino.upload.speed>57600</arduino.upload.speed>
+        <arduino.upload.maximum_size>30720</arduino.upload.maximum_size>
         <visualmicro.application.name>arduino15x</visualmicro.application.name>
         <visualmicro.package.name>arduino</visualmicro.package.name>
         <visualmicro.platform.name>avr</visualmicro.platform.name>
-        <arduino.upload.port>COM7</arduino.upload.port>
+        <arduino.upload.port>COM5</arduino.upload.port>
       </VisualMicroSettings>
     </VisualMicroSettings>
   </PropertyGroup>

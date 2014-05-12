@@ -12,6 +12,7 @@
 #include <Adafruit_Sensor.h>
 #include <Adafruit_TSL2561_U.h>
 #include <HTU21D.h>  // I2C Timeout modified to allow slower clock rate; no longer produces errors
+#include <DHT.h>
 #include <DS3231.h>
 #include <Battery.h>
 #include <XBee.h>
@@ -37,6 +38,9 @@ DallasTemperature airTempSensors(&oneWire);
 Adafruit_TMP006 wallTemperatureSensor(0x44);
 
 // Humidity
+#define RHT_PIN 3
+#define DHT_TYPE DHT22
+DHT humiditySensor03(RHT_PIN, DHT_TYPE, 3);
 HTU21D humiditySensor21;
 
 // Light - Pick one
@@ -56,10 +60,11 @@ EnergyMonitor currentSensor;
 // Misc
 #define DEFAULT_DECIMAL_PLACES 2	// Number of decimal places conserved in float>>int conversions
 #define COMMS_DELAY 300				// Wait time after sending packets through serial or SPI
-#define XBEE_WAKE_DELAY 3000
+#define XBEE_WAKE_DELAY 2000
 #define SD_CARD_WAIT_DELAY 1000		// Length of time between checking that the SD card is present during initialization
-#define SAMPLE_PERIOD 10	// Number of minutes between samples
+#define SAMPLE_PERIOD 5	// Number of minutes between samples
 #define PACKET_BUFFER_SIZE 100		// Number of bytes in the packet buffer
+#define SAMPLE_UPTIME 2	// Length of time that the system stays awake after a sample (for transmission reasons) in seconds
 
 // Transmit packet buffer
 byte packetBuffer[PACKET_BUFFER_SIZE];
@@ -109,8 +114,8 @@ void setup()
 	initialiseDatalog();
 	
 	// Start sensors
-	initialiseTemperatureSense();
 	initialiseHumiditySense();
+	initialiseTemperatureSense();
 	initialiseLightSense();
 }
 
@@ -120,8 +125,8 @@ void setup()
 */
 void loop()
 {
-	readTemperature();
 	readHumidity();
+	readTemperature();
 	readLuminosity();
 	readSound();
 	readCurrent();
@@ -133,13 +138,13 @@ void loop()
 	
 	// Transmit data to the various mediums
 	transmitData();
-	//writeDataToSerial();
 	writeDataToLog();
+	
+	delay(SAMPLE_UPTIME * 1000);
 	
 	sleepNow();
 	
 	// Sleep Point //
-	disableSleep();	
 	sleepLoop();	// Sleep ends after 10 minutes
 	
 	
@@ -166,6 +171,7 @@ void initialiseTemperatureSense()
 void initialiseHumiditySense()
 {
 	humiditySensor21.begin();
+	humiditySensor03.begin();
 }
 
 
@@ -212,7 +218,8 @@ void initialiseDatalog(){
 
 void sleepLoop()
 {
-	while (RTC.now().minute() % SAMPLE_PERIOD != 0){
+	disableSleep();
+	while ((RTC.now().minute() % SAMPLE_PERIOD) != 0){
 		sleepNow();
 		disableSleep();
 	}
@@ -244,10 +251,8 @@ void readTemperature()
 */
 void readHumidity()
 {
-	// HTU21D
-	float temp21 = humiditySensor21.readTemperature();
-	float humidity21 = humiditySensor21.readHumidity();
-	humidity = floatToInt(getCorrectHTU21DHumidity(temp21, humidity21), DEFAULT_DECIMAL_PLACES);
+	// RHT03
+	humidity = floatToInt(humiditySensor03.readHumidity(), DEFAULT_DECIMAL_PLACES);
 }
 
 
@@ -329,19 +334,6 @@ void printTimeStamp(DateTime timeStamp){
 	}
 	
 	Serial.print(timeStamp.second(), DEC);
-}
-
-
-/**
-* Get the corrected relative humidity after apply conversion coefficients
-*
-* @param temperature The temperature of the HTU21D sensor in ï¿½C
-* @param humidity The relative humidity reading of the HTU21D sensor in %
-* @return The corrected humidity value in %
-*/
-float getCorrectHTU21DHumidity(float temperature, float humidity){
-	float correctedHumidity = humidity + (25 - temperature)*-0.15;
-	return correctedHumidity;
 }
 
 
@@ -507,7 +499,7 @@ void writeDataToPacketBuffer(){
 	toBuffer(lightLevel);
 	toBuffer(soundLevel);
 	toBuffer(currentConsumption);
-	toBuffer(batteryCapacity);
+	toBuffer((byte)batteryCapacity);
 	toBuffer((byte)0x0A);	// Newline
 }
 
