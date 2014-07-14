@@ -3,14 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Atmel Studio Solution File, Format Version 11.00
 Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "Stalkerv20", "Stalkerv20.cppproj", "{07B459B4-8D76-4638-BC6D-A459BA2D616B}"
 EndProject
-Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "tmp006", "..\..\Libraries\TMP006\examples\tmp006\tmp006.cppproj", "{C99E683E-8F05-4E13-A527-0A0C97C8B509}"
-EndProject
-Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "SoundTest", "..\SoundTest\SoundTest.cppproj", "{1382CF05-6554-4A94-8F32-13926B585152}"
-EndProject
-Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "Humidity", "..\..\Libraries\HTU21D\examples\Humidity\Humidity.cppproj", "{633FFAC8-49E1-4DEB-8D4B-11570F020D2B}"
-EndProject
-Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "DHTtester", "..\..\Libraries\DHT\examples\DHTtester\DHTtester.cppproj", "{FAF844C1-DBFC-4387-8386-B3AB3C3132E5}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|AVR = Debug|AVR
@@ -21,22 +13,6 @@ Global
 		{07B459B4-8D76-4638-BC6D-A459BA2D616B}.Debug|AVR.Build.0 = Debug|AVR
 		{07B459B4-8D76-4638-BC6D-A459BA2D616B}.Release|AVR.ActiveCfg = Release|AVR
 		{07B459B4-8D76-4638-BC6D-A459BA2D616B}.Release|AVR.Build.0 = Release|AVR
-		{C99E683E-8F05-4E13-A527-0A0C97C8B509}.Debug|AVR.ActiveCfg = Debug|AVR
-		{C99E683E-8F05-4E13-A527-0A0C97C8B509}.Debug|AVR.Build.0 = Debug|AVR
-		{C99E683E-8F05-4E13-A527-0A0C97C8B509}.Release|AVR.ActiveCfg = Release|AVR
-		{C99E683E-8F05-4E13-A527-0A0C97C8B509}.Release|AVR.Build.0 = Release|AVR
-		{1382CF05-6554-4A94-8F32-13926B585152}.Debug|AVR.ActiveCfg = Debug|AVR
-		{1382CF05-6554-4A94-8F32-13926B585152}.Debug|AVR.Build.0 = Debug|AVR
-		{1382CF05-6554-4A94-8F32-13926B585152}.Release|AVR.ActiveCfg = Release|AVR
-		{1382CF05-6554-4A94-8F32-13926B585152}.Release|AVR.Build.0 = Release|AVR
-		{633FFAC8-49E1-4DEB-8D4B-11570F020D2B}.Debug|AVR.ActiveCfg = Debug|AVR
-		{633FFAC8-49E1-4DEB-8D4B-11570F020D2B}.Debug|AVR.Build.0 = Debug|AVR
-		{633FFAC8-49E1-4DEB-8D4B-11570F020D2B}.Release|AVR.ActiveCfg = Release|AVR
-		{633FFAC8-49E1-4DEB-8D4B-11570F020D2B}.Release|AVR.Build.0 = Release|AVR
-		{FAF844C1-DBFC-4387-8386-B3AB3C3132E5}.Debug|AVR.ActiveCfg = Debug|AVR
-		{FAF844C1-DBFC-4387-8386-B3AB3C3132E5}.Debug|AVR.Build.0 = Debug|AVR
-		{FAF844C1-DBFC-4387-8386-B3AB3C3132E5}.Release|AVR.ActiveCfg = Release|AVR
-		{FAF844C1-DBFC-4387-8386-B3AB3C3132E5}.Release|AVR.Build.0 = Release|AVR
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

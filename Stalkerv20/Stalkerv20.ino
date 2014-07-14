@@ -1,6 +1,7 @@
 #include "Arduino.h"
 #include "avr/power.h"
 #include "avr/sleep.h"
+#include "avr/wdt.h"
 #include <EmonLib.h>
 #include <SPI.h>
 #include <SD.h>
@@ -11,41 +12,43 @@
 #include <Adafruit_TMP006.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_TSL2561_U.h>
-#include <HTU21D.h>  // I2C Timeout modified to allow slower clock rate; no longer produces errors
 #include <DHT.h>
 #include <DS3231.h>
 #include <Battery.h>
 #include <XBee.h>
 
+//////////////////////////////////////////////////////////////////////////
+// Unit-specific variables
 
+#define UNIT_NUMBER 2
+DeviceAddress airTempAddress =  {0x28, 0xCC, 0xD8, 0x12, 0x05, 0x00, 0x00, 0x96};
+DeviceAddress wallTempAddress = {0x28, 0x3C, 0xA1, 0x22, 0x05, 0x00, 0x00, 0x32};
 //////////////////////////////////////////////////////////////////////////
 
-const char filename[] = "log.csv";
+const char filename[] = "log.txt";
 
 // Pin Assignments
+#define SENSOR_POWER_PIN A2
 #define XBEE_PWR_PIN 5	// XBee radio power
 #define TF_PWR_PIN 4	// Trans-flash (SD) card power
 #define AIR_TEMP_PIN 9
 #define CHIP_SELECT_PIN 10	// SD Card
 #define CURRENT_SENSE_PIN 1	// Analog - A1
 #define MIC_PIN 0			// Analog - A0
+#define RHT_PIN 3
 
 // Temperature
-#define AIR_TEMP_ID 0
-#define WALL_TEMP_ID 1
+#define TEMPERATURE_PRECISION 12
 OneWire oneWire(AIR_TEMP_PIN);
 DallasTemperature airTempSensors(&oneWire);
 Adafruit_TMP006 wallTemperatureSensor(0x44);
 
 // Humidity
-#define RHT_PIN 3
 #define DHT_TYPE DHT22
 DHT humiditySensor03(RHT_PIN, DHT_TYPE, 3);
-HTU21D humiditySensor21;
 
 // Light - Pick one
 Adafruit_TSL2561_Unified lightSensor = Adafruit_TSL2561_Unified(TSL2561_ADDR_FLOAT);
-//BH1750FVI lightSensor2;
 
 // Sound
 #define MIC_SAMPLE_PERIOD 100	// Sampling window for microphone in milliseconds
@@ -59,10 +62,10 @@ EnergyMonitor currentSensor;
 
 // Misc
 #define DEFAULT_DECIMAL_PLACES 2	// Number of decimal places conserved in float>>int conversions
-#define COMMS_DELAY 300				// Wait time after sending packets through serial or SPI
-#define XBEE_WAKE_DELAY 2000
+#define COMMS_DELAY 100				// Wait time after sending packets through serial or SPI
+#define XBEE_WAKE_DELAY 1000
 #define SD_CARD_WAIT_DELAY 1000		// Length of time between checking that the SD card is present during initialization
-#define SAMPLE_PERIOD 5	// Number of minutes between samples
+#define SAMPLE_PERIOD 10 // Number of minutes between samples
 #define PACKET_BUFFER_SIZE 100		// Number of bytes in the packet buffer
 #define SAMPLE_UPTIME 2	// Length of time that the system stays awake after a sample (for transmission reasons) in seconds
 
@@ -103,20 +106,21 @@ int batteryCapacity;	// Capacity of LiPo battery in percent
 */
 void setup()
 {
+	disableWatchdog();
+	
 	// Communications
 	Serial.begin(57600);
 	Wire.begin();
 	initialiseXBee();
 	RTC.begin();
 	
+	
 	// Start logging
 	resetBuffer();
-	initialiseDatalog();
+	//initialiseDatalog();
 	
 	// Start sensors
-	initialiseHumiditySense();
-	initialiseTemperatureSense();
-	initialiseLightSense();
+	initialiseSensors();
 }
 
 
@@ -125,6 +129,9 @@ void setup()
 */
 void loop()
 {
+	enableWatchdog();
+	
+	// Read sensors
 	readHumidity();
 	readTemperature();
 	readLuminosity();
@@ -132,27 +139,57 @@ void loop()
 	readCurrent();
 	readBatteryCapacity();
 	
+	// Pet the dog
+	wdt_reset();
+	
 	// Prepare the data for transmission
 	resetBuffer();
 	writeDataToPacketBuffer();
 	
 	// Transmit data to the various mediums
 	transmitData();
-	writeDataToLog();
+	//writeDataToLog();
 	
+	disableWatchdog();
+	Serial.print(millis());
+	Serial.print(", ");
+	Serial.println("Sleep");
 	delay(SAMPLE_UPTIME * 1000);
 	
-	sleepNow();
-	
-	// Sleep Point //
-	sleepLoop();	// Sleep ends after 10 minutes
-	
+	enterSleep();	// Sleep ends after 10 minutes
 	
 	wakeUp();
 }
 
 //////////////////////////////////////////////////////////////////////////
 
+void enableWatchdog(){
+	cli();
+	
+	wdt_reset();
+	
+	wdt_enable(WDTO_8S);
+
+	sei();
+}
+
+
+void disableWatchdog(){
+	cli();
+	
+	wdt_reset();
+	
+	wdt_disable();
+	
+	sei();
+}
+
+
+void initialiseSensors(){
+	initialiseTemperatureSense();
+	initialiseHumiditySense();
+	initialiseLightSense();
+}
 
 /**
 * Set up all temperature sensors
@@ -160,8 +197,8 @@ void loop()
 void initialiseTemperatureSense()
 {
 	airTempSensors.begin();
-	wallTemperatureSensor.begin(TMP006_CFG_1SAMPLE);
-	RTC.begin();
+	airTempSensors.setResolution(TEMPERATURE_PRECISION);
+	wallTemperatureSensor.begin(TMP006_CFG_2SAMPLE);
 }
 
 
@@ -170,7 +207,6 @@ void initialiseTemperatureSense()
 */
 void initialiseHumiditySense()
 {
-	humiditySensor21.begin();
 	humiditySensor03.begin();
 }
 
@@ -211,19 +247,27 @@ void initialiseDatalog(){
 	dataFile = SD.open(filename, O_WRITE |  O_APPEND | O_CREAT);
 	if  (!dataFile) {
 		Serial.println("File error");
-		// Wait forever since we can not write data
-		while (1) ;
 	}
 }
 
-void sleepLoop()
+
+/**
+* Put the microcontroller into sleep mode until the sample period has elapsed
+* Relies on the RTC using everyMinute interrupts
+*/
+void enterSleep()
 {
+	sleepNow();
+	
+	// Sleep Point //
+	
 	disableSleep();
 	while ((RTC.now().minute() % SAMPLE_PERIOD) != 0){
 		sleepNow();
 		disableSleep();
 	}
 }
+
 
 /**
 * Take readings from all temperature sensors
@@ -233,8 +277,8 @@ void readTemperature()
 {
 	// DS18B20 Readings
 	airTempSensors.requestTemperatures();
-	airTemp = floatToInt(airTempSensors.getTempCByIndex(AIR_TEMP_ID), DEFAULT_DECIMAL_PLACES);
-	wallTemp1 = floatToInt(airTempSensors.getTempCByIndex(WALL_TEMP_ID), DEFAULT_DECIMAL_PLACES);
+	airTemp = floatToInt(airTempSensors.getTempC(airTempAddress), DEFAULT_DECIMAL_PLACES);
+	wallTemp1 = floatToInt(airTempSensors.getTempC(wallTempAddress), DEFAULT_DECIMAL_PLACES);
 	
 	// TMP006
 	wallTemp2 = floatToInt(wallTemperatureSensor.readObjTempC(), DEFAULT_DECIMAL_PLACES);
@@ -372,14 +416,22 @@ void sleepNow(){
 }
 
 
+/**
+* Wake the microcontroller and peripherals from sleep
+*/
 void wakeUp(){
 	disableSleep();
 	
 	powerUpXbee();
-	powerUpTF();
+	//powerUpTF();
+	powerUpSensors();
 }
 
 
+/**
+* Disable sleep from occuring
+* Pin interrupts are detached and the safety is put back on
+*/
 void disableSleep(){
 	detachInterrupt(INT0);
 	sleep_disable();
@@ -400,15 +452,15 @@ void sleepController()
 	// The microcontroller can only be woken by reset or external interrupt
 	set_sleep_mode(SLEEP_MODE_PWR_DOWN);
 	
+	// Enable RTC interrupts
 	RTC.clearINTStatus();
+	attachInterrupt(INT0, clockInterrupt, LOW);
+	RTC.enableInterrupts(EveryMinute);
 	
 	// Take the safety off
 	sleep_enable();
 	
-	// Enable RTC interrupts
-	attachInterrupt(INT0, clockInterrupt, LOW);
-	RTC.enableInterrupts(EveryMinute);
-	
+	// Put the controller to sleep
 	sleep_mode();
 }
 
@@ -446,21 +498,44 @@ void powerUpTF(){
 }
 
 
+void powerDownSensors(){
+	digitalWrite(SENSOR_POWER_PIN, LOW);	
+}
+
+
+void powerUpSensors(){
+	pinMode(SENSOR_POWER_PIN, OUTPUT);
+	digitalWrite(SENSOR_POWER_PIN, HIGH);
+	Wire.begin();
+}
+
+/**
+* Write the stored packet to the SD card log file
+*/
 void writeDataToLog(){
 	dataFile.write(packetBuffer, bufferPutter);
 	dataFile.flush();
-	delay(COMMS_DELAY);
 }
 
 
+/**
+* Write the stored packet directly to serial
+*/
 void writeDataToSerial(){
 	Serial.write(packetBuffer, bufferPutter);
-	
 }
 
 
+/**
+* Send the recorded packet over the XBee
+* Uses API mode transmission
+*/
 void transmitData(){
 	zbTx = ZBTxRequest(coordinatorAddress, packetBuffer, bufferPutter);
+	
+	// Offset delay to avoid collisions
+	delay(COMMS_DELAY * UNIT_NUMBER);
+	
 	xbee.send(zbTx);
 	
 	// Wait for response
@@ -489,7 +564,11 @@ void transmitData(){
 }
 
 
+/**
+* Records all sampled sensor data to the buffer in raw form
+*/
 void writeDataToPacketBuffer(){
+	toBuffer(byte(UNIT_NUMBER));
 	writeTimeToBuffer();
 	toBuffer(airTemp);
 	toBuffer(wallTemp1);
@@ -529,12 +608,23 @@ void writeTimeToBuffer(){
 * Intentionally left blank
 */
 void clockInterrupt(){
+	
 }                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
 
+
+/**
+* Send an integer to the buffer
+* The value will be stored in its raw, byte form
+*/
 void toBuffer(unsigned int num){
 	toBuffer(num);
 }
 
+
+/**
+* Send an integer to the buffer
+* The value will be stored in its raw, byte form
+*/
 void toBuffer(int num){
 	byte high = highByte(num);
 	byte low = lowByte(num);
@@ -543,6 +633,11 @@ void toBuffer(int num){
 	toBuffer(low);
 }
 
+
+/**
+* Store the input byte into the buffer
+* The putter position is incremented after a successful entry
+*/
 void toBuffer(byte b){
 	if (bufferPutter < PACKET_BUFFER_SIZE){
 		packetBuffer[bufferPutter] = b;
@@ -550,6 +645,11 @@ void toBuffer(byte b){
 	}
 }
 
+
+/**
+* Receive a character from the buffer
+* The buffer getter will increment upon successful retrieval of a byte
+*/
 byte fromBuffer(){
 	byte b = packetBuffer[bufferGetter];
 	
@@ -560,7 +660,12 @@ byte fromBuffer(){
 	return b;
 }
 
+
+/**
+* Ready the buffer to accept new data
+*/
 void resetBuffer(){
 	bufferPutter = 0;
 	bufferGetter = 0;
 }
+

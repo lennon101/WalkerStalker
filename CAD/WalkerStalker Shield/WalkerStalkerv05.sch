@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="6.5.0">
+<eagle version="6.4">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -3971,6 +3971,7 @@ at 30/07/2012 11:22:31</description>
 <wire x1="27.94" y1="83.82" x2="33.02" y2="83.82" width="0.2032" layer="91"/>
 <pinref part="RHT1" gate="G$1" pin="3"/>
 <wire x1="25.4" y1="76.2" x2="27.94" y2="76.2" width="0.2032" layer="91"/>
+<junction x="27.94" y="83.82"/>
 </segment>
 <segment>
 <pinref part="SHT1" gate="G$1" pin="4"/>
@@ -4158,14 +4159,14 @@ at 30/07/2012 11:22:31</description>
 <label x="40.64" y="160.02" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="D4" class="0">
+<net name="TF-PWR" class="0">
 <segment>
 <pinref part="JP-DIGITAL1" gate="A" pin="5"/>
 <wire x1="83.82" y1="157.48" x2="96.52" y2="157.48" width="0.1524" layer="91"/>
 <label x="91.44" y="157.48" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="XBEE-PW" class="0">
+<net name="XBEE-PWR" class="0">
 <segment>
 <pinref part="JP-DIGITAL1" gate="A" pin="6"/>
 <wire x1="83.82" y1="160.02" x2="96.52" y2="160.02" width="0.1524" layer="91"/>
@@ -4195,23 +4196,27 @@ at 30/07/2012 11:22:31</description>
 </sheet>
 </sheets>
 <errors>
-<approved hash="104,1,200.66,157.48,LM358G$1,V+,+3V3,,,"/>
-<approved hash="104,1,200.66,142.24,LM358G$1,V-,GND,,,"/>
+<approved hash="104,1,200.66,154.94,BUFFER,VDD,+3V3,,,"/>
+<approved hash="104,1,200.66,132.08,BUFFER,VSS,GND,,,"/>
 <approved hash="106,1,109.22,160.02,10/CS_TF,,,,,"/>
 <approved hash="106,1,109.22,157.48,11/MOSI,,,,,"/>
 <approved hash="106,1,109.22,154.94,12/MISO,,,,,"/>
 <approved hash="106,1,109.22,152.4,13/SCK,,,,,"/>
 <approved hash="106,1,58.42,160.02,A3,,,,,"/>
 <approved hash="106,1,83.82,152.4,D2,,,,,"/>
-<approved hash="106,1,83.82,162.56,D6,,,,,"/>
-<approved hash="106,1,83.82,165.1,D7,,,,,"/>
 <approved hash="106,1,109.22,165.1,D8,,,,,"/>
-<approved hash="106,1,25.4,71.12,NC,,,,,"/>
 <approved hash="106,1,30.48,165.1,RESET,,,,,"/>
 <approved hash="106,1,83.82,147.32,RXD,,,,,"/>
+<approved hash="106,1,83.82,157.48,TF-PWR,,,,,"/>
 <approved hash="106,1,83.82,149.86,TXD,,,,,"/>
 <approved hash="106,1,30.48,160.02,VIN,,,,,"/>
 <approved hash="106,1,30.48,152.4,VIN/NC,,,,,"/>
+<approved hash="106,1,83.82,160.02,XBEE-PWR,,,,,"/>
+<approved hash="108,1,27.94,83.82,+3V3,,,,,"/>
+<approved hash="115,1,107.111,154.809,JP-DIGITAL2,,,,,"/>
+<approved hash="115,1,81.7113,154.809,JP-DIGITAL1,,,,,"/>
+<approved hash="115,1,30.2814,157.349,JP-POWER,,,,,"/>
+<approved hash="115,1,57.4028,157.349,JP-ANALOG,,,,,"/>
 </errors>
 </schematic>
 </drawing>

@@ -30,7 +30,6 @@
   e:\Dropbox\Projects\libraries\TMP006/Adafruit_TMP006.h \
   e:\Dropbox\Projects\libraries\Adafruit_Sensor/Adafruit_Sensor.h \
   e:\Dropbox\Projects\libraries\TSL2561/Adafruit_TSL2561_U.h \
-  e:\Dropbox\Projects\libraries\HTU21D/HTU21D.h \
   e:\Dropbox\Projects\libraries\DHT/DHT.h \
   e:\Dropbox\Projects\libraries\DS3231/DS3231.h \
   e:\Dropbox\Projects\libraries\SeeedStalkerBattery/Battery.h \
