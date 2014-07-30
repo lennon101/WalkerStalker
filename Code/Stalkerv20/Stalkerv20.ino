@@ -20,9 +20,9 @@
 //////////////////////////////////////////////////////////////////////////
 // Unit-specific variables
 
-#define UNIT_NUMBER 2
-DeviceAddress airTempAddress =  {0x28, 0xCC, 0xD8, 0x12, 0x05, 0x00, 0x00, 0x96};
-DeviceAddress wallTempAddress = {0x28, 0x3C, 0xA1, 0x22, 0x05, 0x00, 0x00, 0x32};
+#define UNIT_NUMBER 14
+DeviceAddress airTempAddress =  {0x28, 0xf8, 0x92, 0x22, 0x05, 0x00, 0x00, 0xbb};
+DeviceAddress wallTempAddress = {0x28, 0xb8, 0xf6, 0x22, 0x05, 0x00, 0x00, 0xc0};
 //////////////////////////////////////////////////////////////////////////
 
 const char filename[] = "log.txt";
@@ -62,12 +62,12 @@ EnergyMonitor currentSensor;
 
 // Misc
 #define DEFAULT_DECIMAL_PLACES 2	// Number of decimal places conserved in float>>int conversions
-#define COMMS_DELAY 100				// Wait time after sending packets through serial or SPI
+#define COMMS_DELAY 200				// Wait time after sending packets through serial or SPI
 #define XBEE_WAKE_DELAY 1000
 #define SD_CARD_WAIT_DELAY 1000		// Length of time between checking that the SD card is present during initialization
 #define SAMPLE_PERIOD 10 // Number of minutes between samples
 #define PACKET_BUFFER_SIZE 100		// Number of bytes in the packet buffer
-#define SAMPLE_UPTIME 2	// Length of time that the system stays awake after a sample (for transmission reasons) in seconds
+#define SAMPLE_UPTIME 20	// Length of time that the system stays awake after a sample (for transmission reasons) in seconds
 
 // Transmit packet buffer
 byte packetBuffer[PACKET_BUFFER_SIZE];
@@ -117,7 +117,6 @@ void setup()
 	
 	// Start logging
 	resetBuffer();
-	//initialiseDatalog();
 	
 	// Start sensors
 	initialiseSensors();
@@ -148,12 +147,7 @@ void loop()
 	
 	// Transmit data to the various mediums
 	transmitData();
-	//writeDataToLog();
-	
 	disableWatchdog();
-	Serial.print(millis());
-	Serial.print(", ");
-	Serial.println("Sleep");
 	delay(SAMPLE_UPTIME * 1000);
 	
 	enterSleep();	// Sleep ends after 10 minutes

@@ -65,8 +65,8 @@
             <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\standard</Value>
             <Value>e:\Dropbox\Projects\libraries\EmonLib</Value>
             <Value>e:\Dropbox\Projects\libraries\EmonLib\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TinySPI</Value>
-            <Value>e:\Dropbox\Projects\libraries\TinySPI\utility</Value>
+            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI</Value>
+            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\SD</Value>
             <Value>e:\Dropbox\Projects\libraries\SD\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\XBee</Value>
@@ -77,18 +77,22 @@
             <Value>e:\Dropbox\Projects\libraries\OneWire\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\DallasTemperature</Value>
             <Value>e:\Dropbox\Projects\libraries\DallasTemperature\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TMP006</Value>
-            <Value>e:\Dropbox\Projects\libraries\TMP006\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\Adafruit_Sensor</Value>
             <Value>e:\Dropbox\Projects\libraries\Adafruit_Sensor\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TSL2561</Value>
-            <Value>e:\Dropbox\Projects\libraries\TSL2561\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\DHT</Value>
             <Value>e:\Dropbox\Projects\libraries\DHT\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\DS3231</Value>
             <Value>e:\Dropbox\Projects\libraries\DS3231\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\TMP006</Value>
+            <Value>e:\Dropbox\Projects\libraries\TMP006\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\TSL2561</Value>
+            <Value>e:\Dropbox\Projects\libraries\TSL2561\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\SeeedStalkerBattery</Value>
             <Value>e:\Dropbox\Projects\libraries\SeeedStalkerBattery\utility</Value>
+            <Value>c:\Program Files (x86)\Arduino\libraries</Value>
+            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries</Value>
+            <Value>C:\Program Files (x86)\Visual Micro\Visual Micro for Arduino\Micro Platforms\default\debuggers</Value>
+            <Value>e:\Dropbox\Projects\libraries</Value>
             <Value>c:\program files (x86)\arduino\hardware\tools\avr\avr\include\</Value>
             <Value>c:\program files (x86)\arduino\hardware\tools\avr\avr\include\avr\</Value>
             <Value>c:\program files (x86)\arduino\hardware\tools\avr\avr\</Value>
@@ -120,8 +124,8 @@
             <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\standard</Value>
             <Value>e:\Dropbox\Projects\libraries\EmonLib</Value>
             <Value>e:\Dropbox\Projects\libraries\EmonLib\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TinySPI</Value>
-            <Value>e:\Dropbox\Projects\libraries\TinySPI\utility</Value>
+            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI</Value>
+            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\SD</Value>
             <Value>e:\Dropbox\Projects\libraries\SD\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\XBee</Value>
@@ -132,18 +136,22 @@
             <Value>e:\Dropbox\Projects\libraries\OneWire\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\DallasTemperature</Value>
             <Value>e:\Dropbox\Projects\libraries\DallasTemperature\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TMP006</Value>
-            <Value>e:\Dropbox\Projects\libraries\TMP006\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\Adafruit_Sensor</Value>
             <Value>e:\Dropbox\Projects\libraries\Adafruit_Sensor\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TSL2561</Value>
-            <Value>e:\Dropbox\Projects\libraries\TSL2561\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\DHT</Value>
             <Value>e:\Dropbox\Projects\libraries\DHT\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\DS3231</Value>
             <Value>e:\Dropbox\Projects\libraries\DS3231\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\TMP006</Value>
+            <Value>e:\Dropbox\Projects\libraries\TMP006\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\TSL2561</Value>
+            <Value>e:\Dropbox\Projects\libraries\TSL2561\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\SeeedStalkerBattery</Value>
             <Value>e:\Dropbox\Projects\libraries\SeeedStalkerBattery\utility</Value>
+            <Value>c:\Program Files (x86)\Arduino\libraries</Value>
+            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries</Value>
+            <Value>C:\Program Files (x86)\Visual Micro\Visual Micro for Arduino\Micro Platforms\default\debuggers</Value>
+            <Value>e:\Dropbox\Projects\libraries</Value>
             <Value>c:\program files (x86)\arduino\hardware\tools\avr\avr\include\</Value>
             <Value>c:\program files (x86)\arduino\hardware\tools\avr\avr\include\avr\</Value>
             <Value>c:\program files (x86)\arduino\hardware\tools\avr\avr\</Value>
@@ -322,7 +330,7 @@ build.arch=AVR
         <visualmicro.application.name>arduino15x</visualmicro.application.name>
         <visualmicro.package.name>arduino</visualmicro.package.name>
         <visualmicro.platform.name>avr</visualmicro.platform.name>
-        <arduino.upload.port>COM7</arduino.upload.port>
+        <arduino.upload.port>COM5</arduino.upload.port>
       </VisualMicroSettings>
     </VisualMicroSettings>
   </PropertyGroup>
@@ -352,8 +360,8 @@ build.arch=AVR
             <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\standard</Value>
             <Value>e:\Dropbox\Projects\libraries\EmonLib</Value>
             <Value>e:\Dropbox\Projects\libraries\EmonLib\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TinySPI</Value>
-            <Value>e:\Dropbox\Projects\libraries\TinySPI\utility</Value>
+            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI</Value>
+            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\SD</Value>
             <Value>e:\Dropbox\Projects\libraries\SD\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\XBee</Value>
@@ -364,18 +372,22 @@ build.arch=AVR
             <Value>e:\Dropbox\Projects\libraries\OneWire\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\DallasTemperature</Value>
             <Value>e:\Dropbox\Projects\libraries\DallasTemperature\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TMP006</Value>
-            <Value>e:\Dropbox\Projects\libraries\TMP006\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\Adafruit_Sensor</Value>
             <Value>e:\Dropbox\Projects\libraries\Adafruit_Sensor\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TSL2561</Value>
-            <Value>e:\Dropbox\Projects\libraries\TSL2561\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\DHT</Value>
             <Value>e:\Dropbox\Projects\libraries\DHT\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\DS3231</Value>
             <Value>e:\Dropbox\Projects\libraries\DS3231\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\TMP006</Value>
+            <Value>e:\Dropbox\Projects\libraries\TMP006\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\TSL2561</Value>
+            <Value>e:\Dropbox\Projects\libraries\TSL2561\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\SeeedStalkerBattery</Value>
             <Value>e:\Dropbox\Projects\libraries\SeeedStalkerBattery\utility</Value>
+            <Value>c:\Program Files (x86)\Arduino\libraries</Value>
+            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries</Value>
+            <Value>C:\Program Files (x86)\Visual Micro\Visual Micro for Arduino\Micro Platforms\default\debuggers</Value>
+            <Value>e:\Dropbox\Projects\libraries</Value>
             <Value>c:\program files (x86)\arduino\hardware\tools\avr\avr\include\</Value>
             <Value>c:\program files (x86)\arduino\hardware\tools\avr\avr\include\avr\</Value>
             <Value>c:\program files (x86)\arduino\hardware\tools\avr\avr\</Value>
@@ -407,8 +419,8 @@ build.arch=AVR
             <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\standard</Value>
             <Value>e:\Dropbox\Projects\libraries\EmonLib</Value>
             <Value>e:\Dropbox\Projects\libraries\EmonLib\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TinySPI</Value>
-            <Value>e:\Dropbox\Projects\libraries\TinySPI\utility</Value>
+            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI</Value>
+            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\SD</Value>
             <Value>e:\Dropbox\Projects\libraries\SD\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\XBee</Value>
@@ -419,18 +431,22 @@ build.arch=AVR
             <Value>e:\Dropbox\Projects\libraries\OneWire\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\DallasTemperature</Value>
             <Value>e:\Dropbox\Projects\libraries\DallasTemperature\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TMP006</Value>
-            <Value>e:\Dropbox\Projects\libraries\TMP006\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\Adafruit_Sensor</Value>
             <Value>e:\Dropbox\Projects\libraries\Adafruit_Sensor\utility</Value>
-            <Value>e:\Dropbox\Projects\libraries\TSL2561</Value>
-            <Value>e:\Dropbox\Projects\libraries\TSL2561\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\DHT</Value>
             <Value>e:\Dropbox\Projects\libraries\DHT\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\DS3231</Value>
             <Value>e:\Dropbox\Projects\libraries\DS3231\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\TMP006</Value>
+            <Value>e:\Dropbox\Projects\libraries\TMP006\utility</Value>
+            <Value>e:\Dropbox\Projects\libraries\TSL2561</Value>
+            <Value>e:\Dropbox\Projects\libraries\TSL2561\utility</Value>
             <Value>e:\Dropbox\Projects\libraries\SeeedStalkerBattery</Value>
             <Value>e:\Dropbox\Projects\libraries\SeeedStalkerBattery\utility</Value>
+            <Value>c:\Program Files (x86)\Arduino\libraries</Value>
+            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries</Value>
+            <Value>C:\Program Files (x86)\Visual Micro\Visual Micro for Arduino\Micro Platforms\default\debuggers</Value>
+            <Value>e:\Dropbox\Projects\libraries</Value>
             <Value>c:\program files (x86)\arduino\hardware\tools\avr\avr\include\</Value>
             <Value>c:\program files (x86)\arduino\hardware\tools\avr\avr\include\avr\</Value>
             <Value>c:\program files (x86)\arduino\hardware\tools\avr\avr\</Value>
@@ -609,7 +625,7 @@ build.arch=AVR
         <visualmicro.application.name>arduino15x</visualmicro.application.name>
         <visualmicro.package.name>arduino</visualmicro.package.name>
         <visualmicro.platform.name>avr</visualmicro.platform.name>
-        <arduino.upload.port>COM7</arduino.upload.port>
+        <arduino.upload.port>COM5</arduino.upload.port>
       </VisualMicroSettings>
     </VisualMicroSettings>
   </PropertyGroup>
