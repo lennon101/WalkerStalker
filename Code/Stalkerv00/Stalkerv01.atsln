@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "Stalkerv01", "Stalkerv01.cppproj", "{07B459B4-8D76-4638-BC6D-A459BA2D616B}"
+EndProject
+Project("{E66E83B9-2572-4076-B26E-6BE79FF3018A}") = "Stalkerv02", "..\Stalkerv02\Stalkerv02.cppproj", "{C9320D0A-9696-40D9-9CC2-7BD3571364E6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{07B459B4-8D76-4638-BC6D-A459BA2D616B}.Debug|AVR.ActiveCfg = Debug|AVR
+		{07B459B4-8D76-4638-BC6D-A459BA2D616B}.Debug|AVR.Build.0 = Debug|AVR
+		{07B459B4-8D76-4638-BC6D-A459BA2D616B}.Release|AVR.ActiveCfg = Release|AVR
+		{07B459B4-8D76-4638-BC6D-A459BA2D616B}.Release|AVR.Build.0 = Release|AVR
+		{C9320D0A-9696-40D9-9CC2-7BD3571364E6}.Debug|AVR.ActiveCfg = Debug|AVR
+		{C9320D0A-9696-40D9-9CC2-7BD3571364E6}.Debug|AVR.Build.0 = Debug|AVR
+		{C9320D0A-9696-40D9-9CC2-7BD3571364E6}.Release|AVR.ActiveCfg = Release|AVR
+		{C9320D0A-9696-40D9-9CC2-7BD3571364E6}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

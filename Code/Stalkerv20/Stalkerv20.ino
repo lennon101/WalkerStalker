@@ -23,8 +23,9 @@
 #define UNIT_NUMBER 14
 DeviceAddress airTempAddress =  {0x28, 0xf8, 0x92, 0x22, 0x05, 0x00, 0x00, 0xbb};
 DeviceAddress wallTempAddress = {0x28, 0xb8, 0xf6, 0x22, 0x05, 0x00, 0x00, 0xc0};
-//////////////////////////////////////////////////////////////////////////
 
+//////////////////////////////////////////////////////////////////////////
+// Configuration
 const char filename[] = "log.txt";
 
 // Pin Assignments
@@ -47,7 +48,7 @@ Adafruit_TMP006 wallTemperatureSensor(0x44);
 #define DHT_TYPE DHT22
 DHT humiditySensor03(RHT_PIN, DHT_TYPE, 3);
 
-// Light - Pick one
+// Light
 Adafruit_TSL2561_Unified lightSensor = Adafruit_TSL2561_Unified(TSL2561_ADDR_FLOAT);
 
 // Sound
@@ -67,7 +68,7 @@ EnergyMonitor currentSensor;
 #define SD_CARD_WAIT_DELAY 1000		// Length of time between checking that the SD card is present during initialization
 #define SAMPLE_PERIOD 10 // Number of minutes between samples
 #define PACKET_BUFFER_SIZE 100		// Number of bytes in the packet buffer
-#define SAMPLE_UPTIME 20	// Length of time that the system stays awake after a sample (for transmission reasons) in seconds
+#define SAMPLE_UPTIME 10	// Length of time that the system stays awake after a sample (for transmission reasons) in seconds
 
 // Transmit packet buffer
 byte packetBuffer[PACKET_BUFFER_SIZE];
@@ -80,15 +81,15 @@ const int INTERRUPT_NUM = 0;
 File dataFile;
 
 XBee xbee = XBee();
-XBeeAddress64 coordinatorAddress = XBeeAddress64(0x0013A200, 0x040AA1A3E);
+XBeeAddress64 coordinatorAddress = XBeeAddress64(0x0, 0x0);	// Send to coordinator
 ZBTxRequest zbTx = ZBTxRequest(coordinatorAddress, packetBuffer, bufferPutter);
 ZBTxStatusResponse txStatus = ZBTxStatusResponse();
 
 
 // Data variables
 int airTemp;	// DS18B20
-int wallTemp1;	// DS18B20
-int wallTemp2;	// TMP006
+int wallTemp;	// DS18B20
+int surfaceTemp;	// TMP006
 int caseTemp;	// DS3231
 int humidity;	// HTU21D
 int lightLevel;	// TSL2561
@@ -97,7 +98,8 @@ int currentConsumption;	// Split current transformer
 int batteryCapacity;	// Capacity of LiPo battery in percent
 
 
-
+//////////////////////////////////////////////////////////////////////////
+// Main Functions
 //////////////////////////////////////////////////////////////////////////
 
 /**
@@ -114,12 +116,13 @@ void setup()
 	initialiseXBee();
 	RTC.begin();
 	
-	
 	// Start logging
 	resetBuffer();
 	
 	// Start sensors
 	initialiseSensors();
+	
+	showDebugStartMessage();
 }
 
 
@@ -128,28 +131,30 @@ void setup()
 */
 void loop()
 {
+	showDebugWakeMessage();
 	enableWatchdog();
 	
-	// Read sensors
-	readHumidity();
-	readTemperature();
-	readLuminosity();
-	readSound();
-	readCurrent();
-	readBatteryCapacity();
+	getSensorReadings();
+	showDebugSensorReadings();
 	
 	// Pet the dog
 	wdt_reset();
 	
-	// Prepare the data for transmission
+	// Transmit the recorded data
 	resetBuffer();
 	writeDataToPacketBuffer();
 	
-	// Transmit data to the various mediums
+	// Offset delay to avoid collisions
+	delay(COMMS_DELAY * UNIT_NUMBER);
 	transmitData();
+	showDebugTransmitNotification();
+	
 	disableWatchdog();
+	
+	// Hold-off time
 	delay(SAMPLE_UPTIME * 1000);
 	
+	showDebugSleepMessage();
 	enterSleep();	// Sleep ends after 10 minutes
 	
 	wakeUp();
@@ -157,33 +162,249 @@ void loop()
 
 //////////////////////////////////////////////////////////////////////////
 
-void enableWatchdog(){
-	cli();
-	
-	wdt_reset();
-	
-	wdt_enable(WDTO_8S);
+//////////////////////////////////////////////////////////////////////////
+// Buffer
 
-	sei();
+/**
+* Send an integer to the buffer
+* The value will be stored in its raw, byte form
+*/
+void toBuffer(unsigned int num){
+	toBuffer(num);
 }
 
 
-void disableWatchdog(){
-	cli();
+/**
+* Send an integer to the buffer
+* The value will be stored in its raw, byte form
+*/
+void toBuffer(int num){
+	byte high = highByte(num);
+	byte low = lowByte(num);
 	
-	wdt_reset();
-	
-	wdt_disable();
-	
-	sei();
+	toBuffer(high);
+	toBuffer(low);
 }
 
 
+/**
+* Store the input byte into the buffer
+* The putter position is incremented after a successful entry
+*/
+void toBuffer(byte b){
+	if (bufferPutter < PACKET_BUFFER_SIZE){
+		packetBuffer[bufferPutter] = b;
+		bufferPutter++;
+	}
+}
+
+
+/**
+* Receive a character from the buffer
+* The buffer getter will increment upon successful retrieval of a byte
+*/
+byte fromBuffer(){
+	byte b = packetBuffer[bufferGetter];
+	
+	if (bufferGetter < PACKET_BUFFER_SIZE){
+		bufferGetter++;
+	}
+	
+	return b;
+}
+
+
+/**
+* Ready the buffer to accept new data
+*/
+void resetBuffer(){
+	bufferPutter = 0;
+	bufferGetter = 0;
+}
+
+
+/**
+* Records all sampled sensor data to the buffer in raw form
+*/
+void writeDataToPacketBuffer(){
+	toBuffer(byte(UNIT_NUMBER));
+	writeTimeToBuffer();
+	toBuffer(airTemp);
+	toBuffer(wallTemp);
+	toBuffer(surfaceTemp);
+	toBuffer(caseTemp);
+	toBuffer(humidity);
+	toBuffer(lightLevel);
+	toBuffer(soundLevel);
+	toBuffer(currentConsumption);
+	toBuffer((byte)batteryCapacity);
+	toBuffer((byte)0x0A);	// Newline
+}
+
+
+/**
+* Send the current timestamp to the buffer
+* The data is entered into the buffer as 4 separate bytes
+*/
+void writeTimeToBuffer(){
+	long timeStamp = RTC.now().get();
+	
+	byte b1 = (byte) timeStamp;
+	byte b2 = (byte) (timeStamp >> 8 & 0xFF);
+	byte b3 = (byte) (timeStamp >> 16 & 0xFF);
+	byte b4 = (byte) (timeStamp >> 24 & 0xFF);
+	
+
+	toBuffer(b4);
+	toBuffer(b3);
+	toBuffer(b2);
+	toBuffer(b1);
+}
+
+
+/**
+* Convert a floating point decimal number into an int
+* The decimal is shifted prior to conversion to preserve precision, but reduce range.
+* e.g. floatToInt(12.34, 2) = 1234
+*
+* @return decimal-shifted integer
+* @param num Float number to convert
+* @param decimalShift Number of decimal shifts (1-4)
+*/
+int floatToInt(float num, int decimalShift){
+	long decimalMultiplier = 1;
+	
+	if(decimalShift > 0 && decimalShift < 5){
+		decimalMultiplier = pow(10, decimalShift);
+	}
+	
+	return (int)(num*decimalMultiplier);
+}
+
+
+//////////////////////////////////////////////////////////////////////////
+// Communications - XBee
+
+/**
+* Set up the XBee radio
+*/
+void initialiseXBee(){
+	pinMode(XBEE_PWR_PIN, OUTPUT);
+	powerUpXbee();
+	
+	xbee.setSerial(Serial);
+}
+
+
+/**
+* Send the recorded packet over the XBee
+* Uses API mode transmission
+*/
+void transmitData(){
+	zbTx = ZBTxRequest(coordinatorAddress, packetBuffer, bufferPutter);
+	xbee.send(zbTx);
+}
+
+
+/**
+* Stop power to the XBee radio
+*/
+void powerDownXbee(){
+	digitalWrite(XBEE_PWR_PIN, LOW);
+}
+
+
+/**
+* Supply power to the XBee radio
+*/
+void powerUpXbee(){
+	digitalWrite(XBEE_PWR_PIN, HIGH);
+	delay(XBEE_WAKE_DELAY);
+}
+
+
+//////////////////////////////////////////////////////////////////////////
+// Debug Notifications
+
+void showDebugStartMessage(){
+	Serial.print("\nWalker Stalker v20 - Unit ");
+	Serial.println(int(UNIT_NUMBER));
+	
+}
+
+void showDebugSensorReadings(){
+	Serial.print("Air Temp:\t");
+	Serial.println(airTemp);
+	Serial.print("Wall Temp:\t");
+	Serial.println(wallTemp);
+	Serial.print("Surface Temp:\t");
+	Serial.println(surfaceTemp);
+	Serial.print("Humidity:\t");
+	Serial.println(humidity);
+	Serial.print("Light Level:\t");
+	Serial.println(lightLevel);
+	Serial.print("Sound Level:\t");
+	Serial.println(soundLevel);
+	Serial.print("Current:\t");
+	Serial.println(currentConsumption);
+}
+
+void showDebugTransmitNotification(){
+	Serial.println("Packet transmitted");
+}
+
+void showDebugSleepMessage(){
+	Serial.println("Sleep time");
+}
+
+void showDebugWakeMessage(){
+	Serial.print("\nAwake: ");
+	printTimestamp();
+}
+
+void showDebugWakePing(){
+	Serial.print("Still alive - Battery: ");
+	
+	battery.update();
+	Serial.print(battery.getPercentage());
+	Serial.print("% ~ ");
+	Serial.println(battery.getChStatus());
+	Serial.flush();
+}
+
+void printTimestamp(){
+	DateTime timestamp = RTC.now();
+	
+	Serial.print(timestamp.year());
+	Serial.print("-");
+	if(timestamp.month() < 10){Serial.print(0);}
+	Serial.print(timestamp.month());
+	Serial.print("-");
+	if(timestamp.date() < 10){Serial.print(0);}
+	Serial.print(timestamp.date());
+	Serial.print(" ");
+	if(timestamp.hour() < 10){Serial.print(0);}
+	Serial.print(timestamp.hour());
+	Serial.print(":");
+	if(timestamp.minute() < 10){Serial.print(0);}
+	Serial.print(timestamp.minute());
+	Serial.print(":");
+	if(timestamp.second() < 10){Serial.print(0);}
+	Serial.println(timestamp.second());
+}
+
+//////////////////////////////////////////////////////////////////////////
+// Sensors
+
+/**
+* Initialise all the sensors
+*/
 void initialiseSensors(){
 	initialiseTemperatureSense();
 	initialiseHumiditySense();
 	initialiseLightSense();
 }
+
 
 /**
 * Set up all temperature sensors
@@ -215,51 +436,16 @@ void initialiseLightSense()
 
 
 /**
-* Set up the XBee radio
+* Read in data from all the sensors
 */
-void initialiseXBee(){
-	pinMode(XBEE_PWR_PIN, OUTPUT);
-	powerUpXbee();
-	
-	xbee.setSerial(Serial);
-}
-
-
-/**
-* Set up the SD card and data file
-*/
-void initialiseDatalog(){
-	pinMode(SS, OUTPUT);
-	
-	// Initialise SD card - Keep trying until SD is found
-	while(!SD.begin(CHIP_SELECT_PIN)){
-		Serial.println("Card error");
-		delay(SD_CARD_WAIT_DELAY);
-	}
-	
-	// Initialse data file
-	dataFile = SD.open(filename, O_WRITE |  O_APPEND | O_CREAT);
-	if  (!dataFile) {
-		Serial.println("File error");
-	}
-}
-
-
-/**
-* Put the microcontroller into sleep mode until the sample period has elapsed
-* Relies on the RTC using everyMinute interrupts
-*/
-void enterSleep()
+void getSensorReadings()
 {
-	sleepNow();
-	
-	// Sleep Point //
-	
-	disableSleep();
-	while ((RTC.now().minute() % SAMPLE_PERIOD) != 0){
-		sleepNow();
-		disableSleep();
-	}
+	readHumidity();
+	readTemperature();
+	readLuminosity();
+	readSound();
+	readCurrent();
+	readBatteryCapacity();
 }
 
 
@@ -272,10 +458,10 @@ void readTemperature()
 	// DS18B20 Readings
 	airTempSensors.requestTemperatures();
 	airTemp = floatToInt(airTempSensors.getTempC(airTempAddress), DEFAULT_DECIMAL_PLACES);
-	wallTemp1 = floatToInt(airTempSensors.getTempC(wallTempAddress), DEFAULT_DECIMAL_PLACES);
+	wallTemp = floatToInt(airTempSensors.getTempC(wallTempAddress), DEFAULT_DECIMAL_PLACES);
 	
 	// TMP006
-	wallTemp2 = floatToInt(wallTemperatureSensor.readObjTempC(), DEFAULT_DECIMAL_PLACES);
+	surfaceTemp = floatToInt(wallTemperatureSensor.readObjTempC(), DEFAULT_DECIMAL_PLACES);
 	
 	// DS3231
 	RTC.convertTemperature();
@@ -318,6 +504,29 @@ void readSound()
 
 
 /**
+* Get the average sound level over the specified sampling period
+*
+* @param samplePeriod Listening period for the sampling in ms.
+* @return Average sound level in 10-bit counts
+*/
+int getSoundLevel(int samplePeriod){
+	unsigned long startTime = millis();
+	long total = 0;
+	long count = 0;
+	
+	while (millis() < (startTime + samplePeriod) && samplePeriod > 0){
+		int soundLevel = analogRead(MIC_PIN);
+		total += soundLevel;
+		count += 1;
+
+	}
+	
+	int average = int(total/count);
+	return average;
+}
+
+
+/**
 * Take readings from all current sensors
 * Results are pushed to global variables
 */
@@ -338,63 +547,44 @@ void readBatteryCapacity(){
 
 
 /**
-* Convert a floating point decimal number into an int
-* The decimal is shifted prior to conversion to preserve precision, but reduce range.
-* e.g. floatToInt(12.34, 2) = 1234
-*
-* @return decimal-shifted integer
-* @param num Float number to convert
-* @param decimalShift Number of decimal shifts (1-4)
+* Switch the sensors off
+* WalkerStalker v2.3 needed
 */
-int floatToInt(float num, int decimalShift){
-	long decimalMultiplier = 1;
-	
-	if(decimalShift > 0 && decimalShift < 5){
-		decimalMultiplier = pow(10, decimalShift);
-	}
-	
-	return (int)(num*decimalMultiplier);
+void powerDownSensors(){
+	digitalWrite(SENSOR_POWER_PIN, LOW);
 }
 
 
 /**
-* Print the current time in hh:mm:ss
+* Switch the sensors on
+* WalkerStalker v2.3 needed
 */
-void printTimeStamp(DateTime timeStamp){
-	Serial.print(timeStamp.hour());
-	Serial.print(":");
-	Serial.print(timeStamp.minute());
-	Serial.print(":");
-	
-	// Add leading 0 if needed
-	if(timeStamp.second() < 10){
-		Serial.print("0");
-	}
-	
-	Serial.print(timeStamp.second(), DEC);
+void powerUpSensors(){
+	pinMode(SENSOR_POWER_PIN, OUTPUT);
+	digitalWrite(SENSOR_POWER_PIN, HIGH);
+	Wire.begin();
 }
 
 
-/**
-* Get the average sound level over the specified sampling period
-*
-* @param samplePeriod Listening period for the sampling in ms.
-* @return Average sound level in 10-bit counts
-*/
-int getSoundLevel(int samplePeriod){
-	unsigned long startTime = millis();
-	long total = 0;
-	long count = 0;
-	
-	while (millis() < (startTime + samplePeriod) && samplePeriod > 0){
-		int soundLevel = analogRead(MIC_PIN);
-		total += soundLevel;
-		count += 1;
+//////////////////////////////////////////////////////////////////////////
+// Sleep
 
-	}
+/**
+* Put the microcontroller into sleep mode until the sample period has elapsed
+* Relies on the RTC using everyMinute interrupts
+*/
+void enterSleep()
+{
+	sleepNow();
 	
-	int average = int(total/count);
-	return average;
+	// Sleep Point //
+	
+	disableSleep();
+	while ((RTC.now().minute() % SAMPLE_PERIOD) != 0){
+		showDebugWakePing();
+		sleepNow();
+		disableSleep();
+	}
 }
 
 
@@ -460,19 +650,74 @@ void sleepController()
 
 
 /**
-* Stop power to the XBee radio
+* Periodic interrupt ISR
+* Intentionally left blank
 */
-void powerDownXbee(){
-	digitalWrite(XBEE_PWR_PIN, LOW);
+void clockInterrupt(){
+	
+}
+
+
+//////////////////////////////////////////////////////////////////////////
+// Watchdog
+
+/**
+* Enable the watchdog timer for 8 second timeouts
+*/
+void enableWatchdog(){
+	cli();
+	
+	wdt_reset();
+	
+	wdt_enable(WDTO_8S);
+
+	sei();
 }
 
 
 /**
-* Supply power to the XBee radio
+* Disable the watchdog timer
 */
-void powerUpXbee(){
-	digitalWrite(XBEE_PWR_PIN, HIGH);
-	delay(XBEE_WAKE_DELAY);
+void disableWatchdog(){
+	cli();
+	
+	wdt_reset();
+	
+	wdt_disable();
+	
+	sei();
+}
+
+
+//////////////////////////////////////////////////////////////////////////
+// SD Card - Obsolete (Delete next iteration)
+
+/**
+* Set up the SD card and data file
+*/
+void initialiseDatalog(){
+	pinMode(SS, OUTPUT);
+	
+	// Initialise SD card - Keep trying until SD is found
+	while(!SD.begin(CHIP_SELECT_PIN)){
+		Serial.println("Card error");
+		delay(SD_CARD_WAIT_DELAY);
+	}
+	
+	// Initialse data file
+	dataFile = SD.open(filename, O_WRITE |  O_APPEND | O_CREAT);
+	if  (!dataFile) {
+		Serial.println("File error");
+	}
+}
+
+
+/**
+* Write the stored packet to the SD card log file
+*/
+void writeDataToLog(){
+	dataFile.write(packetBuffer, bufferPutter);
+	dataFile.flush();
 }
 
 
@@ -490,176 +735,3 @@ void powerDownTF(){
 void powerUpTF(){
 	digitalWrite(TF_PWR_PIN, HIGH);
 }
-
-
-void powerDownSensors(){
-	digitalWrite(SENSOR_POWER_PIN, LOW);	
-}
-
-
-void powerUpSensors(){
-	pinMode(SENSOR_POWER_PIN, OUTPUT);
-	digitalWrite(SENSOR_POWER_PIN, HIGH);
-	Wire.begin();
-}
-
-/**
-* Write the stored packet to the SD card log file
-*/
-void writeDataToLog(){
-	dataFile.write(packetBuffer, bufferPutter);
-	dataFile.flush();
-}
-
-
-/**
-* Write the stored packet directly to serial
-*/
-void writeDataToSerial(){
-	Serial.write(packetBuffer, bufferPutter);
-}
-
-
-/**
-* Send the recorded packet over the XBee
-* Uses API mode transmission
-*/
-void transmitData(){
-	zbTx = ZBTxRequest(coordinatorAddress, packetBuffer, bufferPutter);
-	
-	// Offset delay to avoid collisions
-	delay(COMMS_DELAY * UNIT_NUMBER);
-	
-	xbee.send(zbTx);
-	
-	// Wait for response
-	if (xbee.readPacket(500)) {
-
-		// The packet should be have a response api id
-		if (xbee.getResponse().getApiId() == ZB_TX_STATUS_RESPONSE) {
-			xbee.getResponse().getZBTxStatusResponse(txStatus);
-
-			// get the delivery status, the fifth byte
-			if (txStatus.getDeliveryStatus() == SUCCESS) {
-				// success.  time to celebrate
-				
-				} else {
-				// Remote unit had trouble receiving
-			}
-		}
-		
-		} else if (xbee.getResponse().isError()) {
-		
-		} else {
-		// Timeout
-		
-	}
-
-}
-
-
-/**
-* Records all sampled sensor data to the buffer in raw form
-*/
-void writeDataToPacketBuffer(){
-	toBuffer(byte(UNIT_NUMBER));
-	writeTimeToBuffer();
-	toBuffer(airTemp);
-	toBuffer(wallTemp1);
-	toBuffer(wallTemp2);
-	toBuffer(caseTemp);
-	toBuffer(humidity);
-	toBuffer(lightLevel);
-	toBuffer(soundLevel);
-	toBuffer(currentConsumption);
-	toBuffer((byte)batteryCapacity);
-	toBuffer((byte)0x0A);	// Newline
-}
-
-
-/**
-* Send the current timestamp to the buffer
-* The data is entered into the buffer as 4 separate bytes
-*/
-void writeTimeToBuffer(){
-	long timeStamp = RTC.now().get();
-	
-	byte b1 = (byte) timeStamp;
-	byte b2 = (byte) (timeStamp >> 8 & 0xFF);
-	byte b3 = (byte) (timeStamp >> 16 & 0xFF);
-	byte b4 = (byte) (timeStamp >> 24 & 0xFF);
-	
-
-	toBuffer(b4);
-	toBuffer(b3);
-	toBuffer(b2);
-	toBuffer(b1);
-}
-
-
-/**
-* Periodic interrupt ISR
-* Intentionally left blank
-*/
-void clockInterrupt(){
-	
-}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-
-
-/**
-* Send an integer to the buffer
-* The value will be stored in its raw, byte form
-*/
-void toBuffer(unsigned int num){
-	toBuffer(num);
-}
-
-
-/**
-* Send an integer to the buffer
-* The value will be stored in its raw, byte form
-*/
-void toBuffer(int num){
-	byte high = highByte(num);
-	byte low = lowByte(num);
-	
-	toBuffer(high);
-	toBuffer(low);
-}
-
-
-/**
-* Store the input byte into the buffer
-* The putter position is incremented after a successful entry
-*/
-void toBuffer(byte b){
-	if (bufferPutter < PACKET_BUFFER_SIZE){
-		packetBuffer[bufferPutter] = b;
-		bufferPutter++;
-	}
-}
-
-
-/**
-* Receive a character from the buffer
-* The buffer getter will increment upon successful retrieval of a byte
-*/
-byte fromBuffer(){
-	byte b = packetBuffer[bufferGetter];
-	
-	if (bufferGetter < PACKET_BUFFER_SIZE){
-		bufferGetter++;
-	}
-	
-	return b;
-}
-
-
-/**
-* Ready the buffer to accept new data
-*/
-void resetBuffer(){
-	bufferPutter = 0;
-	bufferGetter = 0;
-}
-

@@ -19,46 +19,52 @@ extern "C" void __cxa_pure_virtual() {;}
 
 //
 //
-void enableWatchdog();
-void disableWatchdog();
-void initialiseSensors();
-void initialiseTemperatureSense();
-void initialiseHumiditySense();
-void initialiseLightSense();
-void initialiseXBee();
-void initialiseDatalog();
-void enterSleep();
-void readTemperature();
-void readHumidity();
-void readLuminosity();
-void readSound();
-void readCurrent();
-void readBatteryCapacity();
-int floatToInt(float num, int decimalShift);
-void printTimeStamp(DateTime timeStamp);
-int getSoundLevel(int samplePeriod);
-void sleepNow();
-void wakeUp();
-void disableSleep();
-void sleepController();
-void powerDownXbee();
-void powerUpXbee();
-void powerDownTF();
-void powerUpTF();
-void powerDownSensors();
-void powerUpSensors();
-void writeDataToLog();
-void writeDataToSerial();
-void transmitData();
-void writeDataToPacketBuffer();
-void writeTimeToBuffer();
-void clockInterrupt();
 void toBuffer(unsigned int num);
 void toBuffer(int num);
 void toBuffer(byte b);
 byte fromBuffer();
 void resetBuffer();
+void writeDataToPacketBuffer();
+void writeTimeToBuffer();
+int floatToInt(float num, int decimalShift);
+void initialiseXBee();
+void transmitData();
+void powerDownXbee();
+void powerUpXbee();
+void showDebugStartMessage();
+void showDebugSensorReadings();
+void showDebugTransmitNotification();
+void showDebugSleepMessage();
+void showDebugWakeMessage();
+void showDebugWakePing();
+void printTimestamp();
+void initialiseSensors();
+void initialiseTemperatureSense();
+void initialiseHumiditySense();
+void initialiseLightSense();
+void getSensorReadings();
+void readTemperature();
+void readHumidity();
+void readLuminosity();
+void readSound();
+int getSoundLevel(int samplePeriod);
+void readCurrent();
+void readBatteryCapacity();
+void powerDownSensors();
+void powerUpSensors();
+void enterSleep();
+void sleepNow();
+void wakeUp();
+void disableSleep();
+void sleepController();
+void clockInterrupt();
+void enableWatchdog();
+void disableWatchdog();
+void initialiseDatalog();
+void writeDataToLog();
+void powerDownTF();
+void powerUpTF();
 
 #include "c:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\standard\pins_arduino.h" 
 #include "c:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino\arduino.h"
-#include "E:\Dropbox\Projects\WalkerStalker\Stalkerv20\Stalkerv20.ino"
+#include "E:\Dropbox\Projects\WalkerStalker\Code\Stalkerv20\Stalkerv20.ino"
