@@ -1,3 +1,13 @@
+//////////////////////////////////////////////////////////////////////////
+// Walker Stalker v20 [11/4/2014 Leenix]
+//////////////////////////////////////////////////////////////////////////
+//
+//
+// Changelog:
+// Added auto-retry to XBee transmissions [11/4/2014 Leenix]
+//
+//////////////////////////////////////////////////////////////////////////
+
 #include "Arduino.h"
 #include "avr/power.h"
 #include "avr/sleep.h"
@@ -20,9 +30,9 @@
 //////////////////////////////////////////////////////////////////////////
 // Unit-specific variables
 
-#define UNIT_NUMBER 14
-DeviceAddress airTempAddress =  {0x28, 0xf8, 0x92, 0x22, 0x05, 0x00, 0x00, 0xbb};
-DeviceAddress wallTempAddress = {0x28, 0xb8, 0xf6, 0x22, 0x05, 0x00, 0x00, 0xc0};
+#define UNIT_NUMBER 8
+DeviceAddress airTempAddress =  {0x28, 0x55, 0x9F, 0x22, 0x05, 0x00, 0x00, 0x41};
+DeviceAddress wallTempAddress = {0x28, 0x47, 0xA1, 0x22, 0x05, 0x00, 0x00, 0x52};
 
 //////////////////////////////////////////////////////////////////////////
 // Configuration
@@ -69,6 +79,8 @@ EnergyMonitor currentSensor;
 #define SAMPLE_PERIOD 10 // Number of minutes between samples
 #define PACKET_BUFFER_SIZE 100		// Number of bytes in the packet buffer
 #define SAMPLE_UPTIME 10	// Length of time that the system stays awake after a sample (for transmission reasons) in seconds
+#define XBEE_MAX_RETRIES 5	// Number of retries possible
+#define XBEE_ACK_TIMEOUT 1000	// Timeout in milliseconds
 
 // Transmit packet buffer
 byte packetBuffer[PACKET_BUFFER_SIZE];
@@ -106,8 +118,7 @@ int batteryCapacity;	// Capacity of LiPo battery in percent
 * Initialization stage
 * Runs once when power is active
 */
-void setup()
-{
+void setup(){
 	disableWatchdog();
 	
 	// Communications
@@ -129,8 +140,7 @@ void setup()
 /**
 * Main Loop - runs indefinitely
 */
-void loop()
-{
+void loop(){
 	showDebugWakeMessage();
 	enableWatchdog();
 	
@@ -301,8 +311,45 @@ void initialiseXBee(){
 * Uses API mode transmission
 */
 void transmitData(){
-	zbTx = ZBTxRequest(coordinatorAddress, packetBuffer, bufferPutter);
-	xbee.send(zbTx);
+	zbTx = ZBTxRequest(coordinatorAddress, 0xFFFE, 0, 0x0, packetBuffer, bufferPutter, UNIT_NUMBER);
+	int retries = 0;
+	bool packetSent = false;
+	
+	// Attempt to send until the packet transmits or times out
+	while(!packetSent && retries <= XBEE_MAX_RETRIES){
+		retries++;
+		wdt_reset();
+		
+		xbee.send(zbTx);
+					
+		// Check for acknowledgment
+		if (xbee.readPacket(XBEE_ACK_TIMEOUT)) {
+			Serial.println("Response received");
+
+			// should be a znet tx status
+			if (xbee.getResponse().getApiId() == ZB_TX_STATUS_RESPONSE) {
+				xbee.getResponse().getZBTxStatusResponse(txStatus);
+
+				// get the delivery status, the fifth byte
+				if (txStatus.getDeliveryStatus() == SUCCESS) {
+					showDebugTransmitSuccess();
+					packetSent = true;
+					
+					} else {
+					// Packet not sent
+				}
+			}
+		}
+		
+		else if (xbee.getResponse().isError()) {
+			Serial.println("Error receiving packet");
+		}
+		
+		else {
+			// Local XBee did not return a response (very unusual)
+			Serial.print("No response from XBee");
+		}
+	}
 }
 
 
@@ -329,7 +376,6 @@ void powerUpXbee(){
 void showDebugStartMessage(){
 	Serial.print("\nWalker Stalker v20 - Unit ");
 	Serial.println(int(UNIT_NUMBER));
-	
 }
 
 void showDebugSensorReadings(){
@@ -351,6 +397,10 @@ void showDebugSensorReadings(){
 
 void showDebugTransmitNotification(){
 	Serial.println("Packet transmitted");
+}
+
+void showDebugTransmitSuccess(){
+	Serial.println("Acknowledgment received - successful packet");
 }
 
 void showDebugSleepMessage(){
@@ -409,8 +459,7 @@ void initialiseSensors(){
 /**
 * Set up all temperature sensors
 */
-void initialiseTemperatureSense()
-{
+void initialiseTemperatureSense(){
 	airTempSensors.begin();
 	airTempSensors.setResolution(TEMPERATURE_PRECISION);
 	wallTemperatureSensor.begin(TMP006_CFG_2SAMPLE);
@@ -420,8 +469,7 @@ void initialiseTemperatureSense()
 /**
 * Set up all humidity sensors
 */
-void initialiseHumiditySense()
-{
+void initialiseHumiditySense(){
 	humiditySensor03.begin();
 }
 
@@ -429,8 +477,7 @@ void initialiseHumiditySense()
 /**
 * Set up all light sensors
 */
-void initialiseLightSense()
-{
+void initialiseLightSense(){
 	lightSensor.begin();
 }
 
@@ -438,8 +485,7 @@ void initialiseLightSense()
 /**
 * Read in data from all the sensors
 */
-void getSensorReadings()
-{
+void getSensorReadings(){
 	readHumidity();
 	readTemperature();
 	readLuminosity();
@@ -453,8 +499,7 @@ void getSensorReadings()
 * Take readings from all temperature sensors
 * Results are pushed to global variables
 */
-void readTemperature()
-{
+void readTemperature(){
 	// DS18B20 Readings
 	airTempSensors.requestTemperatures();
 	airTemp = floatToInt(airTempSensors.getTempC(airTempAddress), DEFAULT_DECIMAL_PLACES);
@@ -473,8 +518,7 @@ void readTemperature()
 * Take readings from all humidity sensors
 * Results are pushed to global variables
 */
-void readHumidity()
-{
+void readHumidity(){
 	// RHT03
 	humidity = floatToInt(humiditySensor03.readHumidity(), DEFAULT_DECIMAL_PLACES);
 }
@@ -484,8 +528,7 @@ void readHumidity()
 * Take readings from all luminosity sensors
 * Results are pushed to global variables
 */
-void readLuminosity()
-{
+void readLuminosity(){
 	// TSL2561
 	sensors_event_t event;
 	lightSensor.getEvent(&event);
@@ -497,8 +540,7 @@ void readLuminosity()
 * Take readings from all sound sensors
 * Results are pushed to global variables
 */
-void readSound()
-{
+void readSound(){
 	soundLevel = getSoundLevel(MIC_SAMPLE_PERIOD);
 }
 
@@ -530,8 +572,7 @@ int getSoundLevel(int samplePeriod){
 * Take readings from all current sensors
 * Results are pushed to global variables
 */
-void readCurrent()
-{
+void readCurrent(){
 	currentConsumption = floatToInt(currentSensor.calcIrms(CURRENT_SAMPLES), DEFAULT_DECIMAL_PLACES);
 }
 
@@ -573,8 +614,7 @@ void powerUpSensors(){
 * Put the microcontroller into sleep mode until the sample period has elapsed
 * Relies on the RTC using everyMinute interrupts
 */
-void enterSleep()
-{
+void enterSleep(){
 	sleepNow();
 	
 	// Sleep Point //

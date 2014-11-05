@@ -34,6 +34,7 @@ void powerUpXbee();
 void showDebugStartMessage();
 void showDebugSensorReadings();
 void showDebugTransmitNotification();
+void showDebugTransmitSuccess();
 void showDebugSleepMessage();
 void showDebugWakeMessage();
 void showDebugWakePing();
@@ -65,6 +66,6 @@ void writeDataToLog();
 void powerDownTF();
 void powerUpTF();
 
-#include "c:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\standard\pins_arduino.h" 
+#include "c:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\eightanaloginputs\pins_arduino.h" 
 #include "c:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino\arduino.h"
 #include "E:\Dropbox\Projects\WalkerStalker\Code\Stalkerv20\Stalkerv20.ino"

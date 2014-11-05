@@ -62,7 +62,7 @@
         <avrgcc.compiler.directories.IncludePaths>
           <ListValues>
             <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino</Value>
-            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\standard</Value>
+            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\eightanaloginputs</Value>
             <Value>e:\Dropbox\Projects\libraries\EmonLib</Value>
             <Value>e:\Dropbox\Projects\libraries\EmonLib\utility</Value>
             <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI</Value>
@@ -121,7 +121,7 @@
         <avrgcccpp.compiler.directories.IncludePaths>
           <ListValues>
             <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino</Value>
-            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\standard</Value>
+            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\eightanaloginputs</Value>
             <Value>e:\Dropbox\Projects\libraries\EmonLib</Value>
             <Value>e:\Dropbox\Projects\libraries\EmonLib\utility</Value>
             <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI</Value>
@@ -357,7 +357,7 @@ build.arch=AVR
         <avrgcc.compiler.directories.IncludePaths>
           <ListValues>
             <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino</Value>
-            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\standard</Value>
+            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\eightanaloginputs</Value>
             <Value>e:\Dropbox\Projects\libraries\EmonLib</Value>
             <Value>e:\Dropbox\Projects\libraries\EmonLib\utility</Value>
             <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI</Value>
@@ -416,7 +416,7 @@ build.arch=AVR
         <avrgcccpp.compiler.directories.IncludePaths>
           <ListValues>
             <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino</Value>
-            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\standard</Value>
+            <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\eightanaloginputs</Value>
             <Value>e:\Dropbox\Projects\libraries\EmonLib</Value>
             <Value>e:\Dropbox\Projects\libraries\EmonLib\utility</Value>
             <Value>c:\Program Files (x86)\Arduino\hardware\arduino\avr\libraries\SPI</Value>
