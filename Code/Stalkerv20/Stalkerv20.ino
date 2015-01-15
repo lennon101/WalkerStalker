@@ -73,13 +73,13 @@ EnergyMonitor currentSensor;
 
 // Misc
 #define DEFAULT_DECIMAL_PLACES 2	// Number of decimal places conserved in float>>int conversions
-#define COMMS_DELAY 200				// Wait time after sending packets through serial or SPI
+#define COMMS_DELAY 300				// Wait time after sending packets through serial or SPI
 #define XBEE_WAKE_DELAY 1000
 #define SD_CARD_WAIT_DELAY 1000		// Length of time between checking that the SD card is present during initialization
 #define SAMPLE_PERIOD 10 // Number of minutes between samples
 #define PACKET_BUFFER_SIZE 100		// Number of bytes in the packet buffer
-#define SAMPLE_UPTIME 10	// Length of time that the system stays awake after a sample (for transmission reasons) in seconds
-#define XBEE_MAX_RETRIES 5	// Number of retries possible
+#define SAMPLE_UPTIME 5	// Length of time that the system stays awake after a sample (for transmission reasons) in seconds
+#define XBEE_MAX_RETRIES 3	// Number of retries possible
 #define XBEE_ACK_TIMEOUT 1000	// Timeout in milliseconds
 
 // Transmit packet buffer
@@ -385,6 +385,8 @@ void showDebugSensorReadings(){
 	Serial.println(wallTemp);
 	Serial.print("Surface Temp:\t");
 	Serial.println(surfaceTemp);
+	Serial.print("Case Temp:\t");
+	Serial.println(caseTemp);
 	Serial.print("Humidity:\t");
 	Serial.println(humidity);
 	Serial.print("Light Level:\t");
@@ -479,6 +481,7 @@ void initialiseHumiditySense(){
 */
 void initialiseLightSense(){
 	lightSensor.begin();
+	lightSensor.setIntegrationTime(TSL2561_INTEGRATIONTIME_402MS);
 }
 
 

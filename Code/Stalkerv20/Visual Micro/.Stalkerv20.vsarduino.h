@@ -10,11 +10,10 @@
 
 #define __AVR_ATmega328p__
 #define __AVR_ATmega328P__
-#define ARDUINO 101
+#define ARDUINO 156
 #define ARDUINO_MAIN
 #define F_CPU 8000000L
 #define __AVR__
-#define __cplusplus
 extern "C" void __cxa_pure_virtual() {;}
 
 //
@@ -66,6 +65,7 @@ void writeDataToLog();
 void powerDownTF();
 void powerUpTF();
 
-#include "c:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\eightanaloginputs\pins_arduino.h" 
+#include "c:\Program Files (x86)\Arduino\hardware\arduino\avr\variants\standard\pins_arduino.h" 
 #include "c:\Program Files (x86)\Arduino\hardware\arduino\avr\cores\arduino\arduino.h"
 #include "E:\Dropbox\Projects\WalkerStalker\Code\Stalkerv20\Stalkerv20.ino"
+#include "E:\Dropbox\Projects\WalkerStalker\Code\Stalkerv20\.TinyBlink.vsarduino.h"

@@ -64,7 +64,6 @@ It is advisable to place a 200nF capacitor between Vref and GND.
 unsigned long MicroSeconds;
 int DAC0 = 0;
 int DACVal = 0;
-float mV= 0;
 const float Intercept = 5.16; //Place your estimated intercept value here
 const float Slope = 1.041974585; //Place your estimated slope value here
 const int Intercept1 = 516;
@@ -78,13 +77,10 @@ void setup() {
 void loop() {
   MicroSeconds = micros();
   DACVal = analogRead(DAC0);
-  mV = ((DACVal*Slope1)/10000+(Intercept1/100),1);
   Serial.print(MicroSeconds);// Time stamps each mV reading so that you can accurately plot out how the voltage changes over time
   //Serial.print(","); //CSV, uncomment this code during calibration so you can view the raw ADC reading
   //Serial.print(DACVal); //Uncomment this code during calibration so you can view the raw ADC reading
   Serial.print(","); //CSV
-  Serial.print(mV);
-  Serial.print(",");
   if ((DACVal< 1023) && (DACVal > 0)) //Look to see if the DAC input is greater than 0 but less than 1023 otherwise we will send a descriptive message to let us know we are at the edges of the ADC range
   {
     Serial.print((DACVal*Slope)+Intercept,1); //Correction for slope and intercept with the number of decimal places set to 1
