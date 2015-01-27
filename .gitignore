@@ -50,10 +50,17 @@ build/
 [Bb]in/
 [Oo]bj/
 
+[Vv]isual [Mm]icro/
+
 # MSTest test Results
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
 
+*.cppproj
+*.atsln
+*.atsuo
+
+*.*#*
 *_i.c
 *_p.c
 *.ilk
