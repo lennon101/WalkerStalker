@@ -12,54 +12,53 @@
 //////////////////////////////////////////////////////////////////////////
 // Unit-specific variables
 
-#define UNIT_NUMBER 8
+const byte UNIT_NUMBER = 12;
 
 // Minutes between samples
-#define SAMPLE_PERIOD 10
+const byte SAMPLE_PERIOD = 10;
 
 // Serial output level
-#define LOGGER_LEVEL LOG_LEVEL_DEBUG
+const byte LOGGER_LEVEL = LOG_LEVEL_DEBUG;
 
 
 //////////////////////////////////////////////////////////////////////////
 // Pin Assignments
 
-#define SENSOR_POWER_PIN A2
-#define XBEE_PWR_PIN 5	// XBee radio power
-#define TF_PWR_PIN 4	// Trans-flash (SD) card power
-#define TEMP_PROBE_PIN 9
-#define CHIP_SELECT_PIN 10	// SD Card
-#define CURRENT_SENSE_PIN A1	// Analog - A1
-#define MIC_PIN A0			// Analog - A0
-#define RHT_PIN 3
+const byte SENSOR_POWER_PIN = A2;
+const byte XBEE_PWR_PIN = 5;	// XBee radio power
+const byte TF_PWR_PIN = 4;	// Trans-flash (SD) card power
+const byte TEMP_PROBE_PIN = 9;
+const byte CHIP_SELECT_PIN = 10;	// SD Card
+const byte CURRENT_SENSE_PIN = A1;	// Analog - A1
+const byte MIC_PIN = A0;			// Analog - A0
+const byte RHT_PIN = 3;
 
 //////////////////////////////////////////////////////////////////////////
 // Sensor settings
 
 // Temperature - DS18B20
-#define TEMPERATURE_PRECISION 12	// Precision of temperature readings in bits
+const byte TEMPERATURE_PRECISION = 12;	// Precision of temperature readings in bits
 
 
 // Temperature - TMP006
-#define TMP006_ADDRESS 0x44
+const byte TMP006_ADDRESS = 0x44;
 
 
 //Humidity
-#define DHT_TYPE DHT22
 
 
 // Sound
-#define MIC_SAMPLE_PERIOD 100	// Sampling window for microphone in milliseconds
+const int MIC_SAMPLE_PERIOD = 100;	// Sampling window for microphone in milliseconds
 
 
 // Illuminance
-#define TSL2561_ADDRESS TSL2561_ADDR_FLOAT
+const byte TSL2561_ADDRESS = TSL2561_ADDR_FLOAT;
 
 
 // Current
-#define TRANSFORMER_RATIO 2000	// The ratio of the current transformer
-#define BURDEN_RESISTOR 220		// Value of the burden resistor in Ohms
-#define CURRENT_SAMPLES 1000	// Number of ADC samples taken when measuring current
+const int TRANSFORMER_RATIO = 2000;	// The ratio of the current transformer
+const int BURDEN_RESISTOR = 220;		// Value of the burden resistor in Ohms
+const int CURRENT_SAMPLES = 1000;	// Number of ADC samples taken when measuring current
 const float CURRENT_CALIBRATION_FACTOR = TRANSFORMER_RATIO/BURDEN_RESISTOR;
 
 
@@ -67,27 +66,35 @@ const float CURRENT_CALIBRATION_FACTOR = TRANSFORMER_RATIO/BURDEN_RESISTOR;
 // Communication
 
 // Wired - Serial
-#define SERIAL_BAUD 57600
+const long SERIAL_BAUD = 57600;
+
+const long LOGGER_BAUD = 9600;
+const byte LOGGER_SERIAL_TX = 12;
+const byte LOGGER_SERIAL_RX = 11;
 
 // Wireless - XBee
-XBeeAddress64 COORDINATOR_ADDRESS = XBeeAddress64(0x0, 0x0);
-#define XBEE_MAX_RETRIES 5	// Number of retries possible
-#define XBEE_ACK_TIMEOUT 1000	// Timeout in milliseconds
+XBeeAddress64 COORDINATOR_ADDRESS = XBeeAddress64(0x0013a200, 0x40abbade);
+const byte XBEE_MAX_RETRIES = 5;	// Number of retries possible
+const int XBEE_ACK_TIMEOUT = 1000;	// Timeout in milliseconds
 const int XBEE_READ_TIMEOUT = 1000;
 
 // Misc 
-#define PACKET_BUFFER_SIZE 100		// Number of bytes in the packet buffer
+const byte PACKET_BUFFER_SIZE = 100;		// Number of bytes in the packet buffer
+const byte COMMAND_CACHE_SIZE = 32;
 
-#define DEFAULT_DECIMAL_PLACES 2	// Number of decimal places conserved in float>>int conversions
-#define COMMS_DELAY 300				// Wait time after sending packets through serial or SPI
-#define XBEE_WAKE_DELAY 1000
+const byte DEFAULT_DECIMAL_PLACES = 2;	// Number of decimal places conserved in float>>int conversions
+const int COMMS_DELAY = 300;				// Wait time after sending packets through serial or SPI
+const int XBEE_WAKE_DELAY = 1000;
 
-#define SAMPLE_UPTIME 5	// Length of time that the system stays awake after a sample (for transmission reasons) in seconds
+const byte SAMPLE_UPTIME = 5;	// Length of time that the system stays awake after a sample (for transmission reasons) in seconds
+
+// Commands
+const char HOLD_AWAKE = 'H';
 
 //////////////////////////////////////////////////////////////////////////
 // Power/Sleep
 
-#define RTC_INTERRUPT INT0
+const byte RTC_INTERRUPT = INT0;
 
 //////////////////////////////////////////////////////////////////////////
 // DS18B20 Address assignments

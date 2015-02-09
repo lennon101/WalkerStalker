@@ -1,7 +1,5 @@
-#include <ArduinoCommand.h>
-
 //////////////////////////////////////////////////////////////////////////
-const int WALKERSTALKER_VERSION = 2;
+const int WALKERSTALKER_VERSION = 3;
 //////////////////////////////////////////////////////////////////////////
 // WalkerStalker
 //
@@ -14,6 +12,8 @@ const int WALKERSTALKER_VERSION = 2;
 #include "avr/power.h"
 #include "avr/sleep.h"
 #include "avr/wdt.h"
+#include <ProgmemString/ProgmemString.h>
+#include <dht.h>
 #include <StraightBuffer.h>
 #include <Logging.h>
 #include <EmonLib.h>
@@ -26,10 +26,11 @@ const int WALKERSTALKER_VERSION = 2;
 #include <Adafruit_TMP006.h>
 #include <Adafruit_Sensor.h>
 #include <Adafruit_TSL2561_U.h>
-#include <DHT.h>
 #include <DS3231.h>
 #include <Battery.h>
 #include <XBee.h>
+#include <SoftwareSerial.h>
+#include <CommandHandler.h>
 #include "StalkerConfig.h"
 
 using namespace ArduinoJson::Generator;
@@ -48,10 +49,10 @@ Adafruit_TMP006 thermopileSensor(TMP006_ADDRESS);
 
 // Humidity - DHT22
 // The '3' fixes errors at the 8MHz clock rate. Cannot remember why
-DHT humiditySensor(RHT_PIN, DHT_TYPE, 3);
+dht humiditySensor;
 
 // Light - TSL2561
-Adafruit_TSL2561_Unified lightSensor = Adafruit_TSL2561_Unified(TSL2561_ADDRESS);
+Adafruit_TSL2561_Unified lightSensor = Adafruit_TSL2561_Unified(TSL2561_ADDRESS, 1);
 
 // Power - Split current clamp
 EnergyMonitor currentSensor;
@@ -64,9 +65,10 @@ JsonObject<11> sensorData;
 //////////////////////////////////////////////////////////////////////////
 // Communication
 
+SoftwareSerial loggerStream(LOGGER_SERIAL_RX, LOGGER_SERIAL_TX);
+
 // Transmit packet buffer
 StraightBuffer sendBuffer(PACKET_BUFFER_SIZE);
-StraightBuffer readBuffer(PACKET_BUFFER_SIZE);
 
 // Wireless - XBee
 XBee xbee = XBee();
@@ -76,7 +78,8 @@ ZBRxResponse zbRx = ZBRxResponse();
 ZBTxStatusResponse txStatus = ZBTxStatusResponse();
 
 // Commands
-ArduinoCommand commandHandler;
+char _commandBuffer[COMMAND_CACHE_SIZE];
+CommandHandler commandHandler(_commandBuffer, COMMAND_CACHE_SIZE);
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -97,9 +100,11 @@ void setup(){
 	
 	// Disable the watchdog timer to stop restart loops
 	disableWatchdog();
-	
-	Log.Init(LOG_LEVEL_DEBUG, SERIAL_BAUD);
-	Log.Info("WalkerStalker - Unit %d. Firmware ver. %d\n", UNIT_NUMBER, WALKERSTALKER_VERSION);
+	Serial.begin(SERIAL_BAUD);
+	loggerStream.begin(LOGGER_BAUD);
+		
+	Log.Init(LOG_LEVEL_DEBUG, &loggerStream);
+	Log.Info(P("WalkerStalker - Unit %d. Firmware ver. %d"), UNIT_NUMBER, WALKERSTALKER_VERSION);
 
 	Wire.begin();
 	startXBee();
@@ -113,14 +118,19 @@ void setup(){
 */
 void loop(){
 	
+	// Check for incoming packets
+	readXBee();
+	
 	// Enable watchdog to reset the Stalker if it gets stuck reading a sensor
 	enableWatchdog();
+	
 	readSensors();
 	
 	// Transmit the recorded data
 	wdt_reset();
 	prepareDataPacket();
 	transmitData();
+	
 	disableWatchdog();
 	
 	// Hold-off time
@@ -146,9 +156,53 @@ void startXBee(){
 	xbee.setSerial(Serial);
 }
 
+
+/**
+* Add serial response commands
+*/
 void addCommands(){
-	commandHandler.addDefaultHandler(unknown);	
+	commandHandler.setDefaultHandler(commandNotRecognised);
+	commandHandler.addCommand(HOLD_AWAKE, holdAwake);
 }
+
+
+/**
+* Command not recognised; show your dismay!
+*/
+void commandNotRecognised(const char received){
+	Log.Error(P("Command not recognised [%c]"), received);
+}
+
+
+/**
+* Hold the stalker awake so it can receive more instructions from the XBee
+* Hopefully, this can be used to reprogram OTA
+*/
+void holdAwake(){
+	//TODO Enter an XBee read loop
+	
+	//DELETE ME - Test code
+	for (int i = 0; i < 10; i++){
+		sendBuffer.reset();
+		sendBuffer.write('H');
+		sendBuffer.write('e');
+		sendBuffer.write('l');
+		sendBuffer.write('l');
+		sendBuffer.write('o');
+		sendBuffer.write(' ');
+		sendBuffer.write('W');
+		sendBuffer.write('o');
+		sendBuffer.write('r');
+		sendBuffer.write('l');
+		sendBuffer.write('d');
+		sendBuffer.write('\n');
+		
+		transmitData();
+	}
+	
+	
+}
+
 
 /**
 * Write sensor data to buffer for sending via XBee
@@ -197,7 +251,7 @@ void transmitData(){
 
 				// get the delivery status, the fifth byte
 				if (txStatus.getDeliveryStatus() == SUCCESS) {
-					Log.Info("Packet delivery successful");
+					Log.Info(P("Packet delivery successful"));
 					packetSent = true;
 					
 					} else {
@@ -207,16 +261,21 @@ void transmitData(){
 		}
 		
 		else if (xbee.getResponse().isError()) {
-			Log.Error("Could not received packet");
+			Log.Error(P("Could not receive packet"));
 		}
 		
 		else {
 			// Local XBee did not return a response - Happens when serial is in use
-			Log.Error("No response from XBee (Serial in use)\n");
+			Log.Error(P("No response from XBee (Serial in use)"));
 		}
 	}
 }
 
+
+/**
+* Read any incoming data packets
+* Received packets are parsed through the command handler
+*/
 void readXBee(){
 	// Listen for packets
 	if (xbee.readPacket(XBEE_READ_TIMEOUT)){
@@ -227,13 +286,12 @@ void readXBee(){
 			xbee.getResponse().getZBRxResponse(zbRx);
 			
 			for (int i = 0; i < zbRx.getDataLength(); i++){
-				
-			}
-			
-			
+				commandHandler.readIn(zbRx.getData(i));
+			}		
 		}
 	}
 }
+
 
 /**
 * Stop power to the XBee radio
@@ -270,7 +328,7 @@ void startSensors(){
 	
 	sensorData["id"] = UNIT_ID.c_str();
 	sensorData["version"] = WALKERSTALKER_VERSION;
-	Log.Info("Sensors started...\n");
+	Log.Info(P("Sensors started..."));
 }
 
 
@@ -290,6 +348,7 @@ void readSensors(){
 	sensorData["battery"] = readBatteryLevel();
 	
 	Serial.println(sensorData);
+	loggerStream.println(sensorData);
 }
 
 
@@ -320,7 +379,6 @@ float readAirTemperature(){
 * @return Radiant wall temperature in °C
 */
 float readWallTemperature(){
-	temperatureProbes.requestTemperatures();
 	return temperatureProbes.getTempC(wallTemperatureAddresses[UNIT_NUMBER]);
 }
 
@@ -350,7 +408,6 @@ float readCaseTemperature(){
 * Set up all humidity sensors
 */
 void initialiseHumidity(){
-	humiditySensor.begin();
 }
 
 
@@ -359,7 +416,16 @@ void initialiseHumidity(){
 * Results are pushed to global variables
 */
 float readHumidity(){
-	return humiditySensor.readHumidity();
+	float humidity;
+	int status = humiditySensor.read22(RHT_PIN);
+	
+	if (status == DHTLIB_OK){
+		humidity = humiditySensor.humidity;
+	}else{
+		Log.Error(P("Could not read humidity sensor. Error [%i]"), status);
+	}
+	
+	return humidity;
 }
 
 
@@ -371,7 +437,8 @@ float readHumidity(){
 void initialiseIlluminance(){
 	Wire.begin();
 	lightSensor.begin();
-	lightSensor.setIntegrationTime(TSL2561_INTEGRATIONTIME_402MS);
+	lightSensor.enableAutoRange(true);
+	lightSensor.setIntegrationTime(TSL2561_INTEGRATIONTIME_13MS);
 }
 
 
@@ -381,7 +448,7 @@ void initialiseIlluminance(){
 *
 *@return Illuminance in lux
 */
-int readIlluminance(){
+long readIlluminance(){
 	sensors_event_t event;
 	lightSensor.getEvent(&event);
 	return event.light;
@@ -472,6 +539,8 @@ void enterSleep(){
 	
 	disableSleep();
 	while ((RTC.now().minute() % SAMPLE_PERIOD) != 0){
+		DateTime timestamp = RTC.now();
+		Log.Debug(P("Alive - %d:%d"), timestamp.hour(), timestamp.minute());
 		sleepNow();
 		disableSleep();
 	}
@@ -493,7 +562,7 @@ void sleepNow(){
 */
 void wakeUp(){
 	DateTime timestamp = RTC.now();
-	Log.Info("Awake - %d:%d", timestamp.hour(), timestamp.minute());
+	Log.Info(P("\nAwake - %d:%d"), timestamp.hour(), timestamp.minute());
 	
 	disableSleep();
 	
