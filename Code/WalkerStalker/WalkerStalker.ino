@@ -230,7 +230,8 @@ void prepareDataPacket(){
 * Uses API mode transmission
 */
 void transmitData(){
-	zbTx = ZBTxRequest(COORDINATOR_ADDRESS, 0xFFFE, 0, 0x0, sendBuffer.getBufferAddress(), sendBuffer.getWritePosition(), UNIT_NUMBER);
+	zbTx = ZBTxRequest(COORDINATOR_ADDRESS, COORDINATOR_SHORT_ADDRESS, 0, EXTENDED_TIMEOUT, 
+	sendBuffer.getBufferAddress(), sendBuffer.getWritePosition(), UNIT_NUMBER);
 	int retries = 0;
 	bool packetSent = false;
 	
@@ -243,7 +244,7 @@ void transmitData(){
 		
 		// Check for acknowledgment
 		if (xbee.readPacket(XBEE_ACK_TIMEOUT)) {
-			Log.Debug("Response received");
+			Log.Debug(P("Response received - API [%i]"), xbee.getResponse().getApiId());
 
 			// should be a znet tx status
 			if (xbee.getResponse().getApiId() == ZB_TX_STATUS_RESPONSE) {
@@ -255,7 +256,7 @@ void transmitData(){
 					packetSent = true;
 					
 					} else {
-					// Packet not sent
+					Log.Error(P("Packet delivery unsuccessful - [%i]"), txStatus.getDeliveryStatus()); 
 				}
 			}
 		}
@@ -309,6 +310,16 @@ void powerUpXbee(){
 	delay(XBEE_WAKE_DELAY);
 }
 
+int getRSSI(){
+	uint8_t rssi[] = {'D', 'B'};
+	
+	// Send request to get the latest RSSI result
+	AtCommandRequest rssiRequest = AtCommandRequest(rssi);
+	
+	// Wait for XBee response - only local; should be fast
+	
+	// Map RSSI to proper value
+}
 
 //////////////////////////////////////////////////////////////////////////
 // Sensors

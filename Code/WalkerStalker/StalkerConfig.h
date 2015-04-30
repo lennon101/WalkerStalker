@@ -12,7 +12,7 @@
 //////////////////////////////////////////////////////////////////////////
 // Unit-specific variables
 
-const byte UNIT_NUMBER = 12;
+const byte UNIT_NUMBER = 9;
 
 // Minutes between samples
 const byte SAMPLE_PERIOD = 10;
@@ -74,6 +74,9 @@ const byte LOGGER_SERIAL_RX = 11;
 
 // Wireless - XBee
 XBeeAddress64 COORDINATOR_ADDRESS = XBeeAddress64(0x0013a200, 0x40abbade);
+const int COORDINATOR_SHORT_ADDRESS = 0x0000;
+const byte EXTENDED_TIMEOUT = 0x40;
+
 const byte XBEE_MAX_RETRIES = 5;	// Number of retries possible
 const int XBEE_ACK_TIMEOUT = 1000;	// Timeout in milliseconds
 const int XBEE_READ_TIMEOUT = 1000;
