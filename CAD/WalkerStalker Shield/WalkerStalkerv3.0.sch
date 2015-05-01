@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="yes" altdistance="0.01" altunitdist="inch" altunit="inch"/>
+<grid distance="0.1" unitdist="inch" unit="inch" style="lines" multiple="1" display="no" altdistance="0.01" altunitdist="inch" altunit="inch"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="no" active="no"/>
 <layer number="2" name="Route2" color="1" fill="3" visible="no" active="no"/>
@@ -3664,6 +3664,9 @@ TSL2561  0x75
 <wire x1="195.58" y1="73.66" x2="195.58" y2="38.1" width="0.1524" layer="97"/>
 <wire x1="195.58" y1="38.1" x2="127" y2="38.1" width="0.1524" layer="97"/>
 <wire x1="127" y1="38.1" x2="127" y2="73.66" width="0.1524" layer="97"/>
+<text x="147.32" y="134.62" size="1.778" layer="91" rot="R90">Needs better sensor</text>
+<text x="149.86" y="134.62" size="1.778" layer="91" rot="R90">Try HIH-5030</text>
+<text x="15.24" y="121.92" size="1.778" layer="91">Change over to TMP36</text>
 </plain>
 <instances>
 <instance part="GND1" gate="1" x="15.24" y="149.86"/>
