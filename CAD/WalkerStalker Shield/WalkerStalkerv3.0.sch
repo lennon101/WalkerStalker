@@ -3636,11 +3636,11 @@ at 30/07/2012 11:22:31</description>
 <wire x1="124.46" y1="33.02" x2="10.16" y2="33.02" width="0.2032" layer="97" style="longdash"/>
 <wire x1="10.16" y1="33.02" x2="10.16" y2="91.44" width="0.2032" layer="97" style="longdash"/>
 <text x="12.7" y="35.56" size="3.048" layer="97">External Current</text>
-<wire x1="-170.18" y1="193.04" x2="-104.14" y2="193.04" width="0.2032" layer="97" style="longdash"/>
-<wire x1="-104.14" y1="193.04" x2="-104.14" y2="152.4" width="0.2032" layer="97" style="longdash"/>
-<wire x1="-104.14" y1="152.4" x2="-170.18" y2="152.4" width="0.2032" layer="97" style="longdash"/>
-<wire x1="-170.18" y1="152.4" x2="-170.18" y2="193.04" width="0.2032" layer="97" style="longdash"/>
-<text x="-167.64" y="154.94" size="3.048" layer="97">Temperature</text>
+<wire x1="10.16" y1="134.62" x2="76.2" y2="134.62" width="0.2032" layer="97" style="longdash"/>
+<wire x1="76.2" y1="134.62" x2="76.2" y2="93.98" width="0.2032" layer="97" style="longdash"/>
+<wire x1="76.2" y1="93.98" x2="10.16" y2="93.98" width="0.2032" layer="97" style="longdash"/>
+<wire x1="10.16" y1="93.98" x2="10.16" y2="134.62" width="0.2032" layer="97" style="longdash"/>
+<text x="12.7" y="96.52" size="3.048" layer="97">Temperature</text>
 <wire x1="144.78" y1="170.18" x2="190.5" y2="170.18" width="0.2032" layer="97" style="longdash"/>
 <wire x1="190.5" y1="170.18" x2="190.5" y2="127" width="0.2032" layer="97" style="longdash"/>
 <wire x1="190.5" y1="127" x2="144.78" y2="127" width="0.2032" layer="97" style="longdash"/>
@@ -3660,6 +3660,10 @@ at 30/07/2012 11:22:31</description>
  DS3231  0x68
 TSL2561  0x75
  TMP006  0x44</text>
+<wire x1="127" y1="73.66" x2="195.58" y2="73.66" width="0.1524" layer="97"/>
+<wire x1="195.58" y1="73.66" x2="195.58" y2="38.1" width="0.1524" layer="97"/>
+<wire x1="195.58" y1="38.1" x2="127" y2="38.1" width="0.1524" layer="97"/>
+<wire x1="127" y1="38.1" x2="127" y2="73.66" width="0.1524" layer="97"/>
 </plain>
 <instances>
 <instance part="GND1" gate="1" x="15.24" y="149.86"/>
@@ -3682,16 +3686,16 @@ TSL2561  0x75
 <instance part="GND2" gate="1" x="137.16" y="144.78"/>
 <instance part="FRAME1" gate="G$1" x="0" y="0"/>
 <instance part="+3V1" gate="G$1" x="22.86" y="167.64"/>
-<instance part="+3V2" gate="G$1" x="-132.08" y="185.42"/>
-<instance part="GND3" gate="1" x="-132.08" y="157.48"/>
-<instance part="R1" gate="G$1" x="-124.46" y="172.72" rot="R90"/>
+<instance part="+3V2" gate="G$1" x="48.26" y="127"/>
+<instance part="GND3" gate="1" x="48.26" y="99.06"/>
+<instance part="R1" gate="G$1" x="55.88" y="114.3" rot="R90"/>
 <instance part="LIGHT" gate="G$1" x="144.78" y="99.06" smashed="yes">
 <attribute name="VALUE" x="132.08" y="91.44" size="1.778" layer="96"/>
 <attribute name="NAME" x="139.7" y="107.442" size="1.778" layer="95"/>
 </instance>
-<instance part="T-AIR" gate="G$1" x="-160.02" y="167.64" smashed="yes">
-<attribute name="VALUE" x="-162.56" y="160.02" size="1.778" layer="96"/>
-<attribute name="NAME" x="-162.56" y="173.482" size="1.778" layer="95"/>
+<instance part="T-AIR" gate="G$1" x="20.32" y="109.22" smashed="yes">
+<attribute name="VALUE" x="17.78" y="101.6" size="1.778" layer="96"/>
+<attribute name="NAME" x="17.78" y="115.062" size="1.778" layer="95"/>
 </instance>
 <instance part="CURRENT" gate="G$1" x="25.4" y="66.04" rot="MR180"/>
 <instance part="R_SENS" gate="G$1" x="55.88" y="66.04" rot="R90"/>
@@ -3700,9 +3704,9 @@ TSL2561  0x75
 <instance part="GND4" gate="1" x="45.72" y="43.18"/>
 <instance part="C1" gate="G$1" x="50.8" y="50.8"/>
 <instance part="GND5" gate="1" x="68.58" y="38.1"/>
-<instance part="T-WALL" gate="G$1" x="-144.78" y="167.64" smashed="yes">
-<attribute name="VALUE" x="-147.32" y="160.02" size="1.778" layer="96"/>
-<attribute name="NAME" x="-149.86" y="173.482" size="1.778" layer="95"/>
+<instance part="T-WALL" gate="G$1" x="35.56" y="109.22" smashed="yes">
+<attribute name="VALUE" x="33.02" y="101.6" size="1.778" layer="96"/>
+<attribute name="NAME" x="30.48" y="115.062" size="1.778" layer="95"/>
 </instance>
 <instance part="MIC" gate="G$1" x="203.2" y="147.32" smashed="yes">
 <attribute name="VALUE" x="195.58" y="139.7" size="1.778" layer="96"/>
@@ -3722,18 +3726,18 @@ TSL2561  0x75
 <instance part="+3V5" gate="G$1" x="81.28" y="162.56" smashed="yes">
 <attribute name="VALUE" x="78.74" y="170.18" size="1.778" layer="96" rot="R270"/>
 </instance>
-<instance part="T_SURF" gate="G$1" x="-132.08" y="109.22" smashed="yes">
-<attribute name="VALUE" x="-144.78" y="101.6" size="1.778" layer="96"/>
-<attribute name="NAME" x="-137.16" y="117.602" size="1.778" layer="95"/>
+<instance part="T_SURF" gate="G$1" x="142.24" y="53.34" smashed="yes">
+<attribute name="VALUE" x="129.54" y="45.72" size="1.778" layer="96"/>
+<attribute name="NAME" x="137.16" y="61.722" size="1.778" layer="95"/>
 </instance>
-<instance part="+3V8" gate="G$1" x="-121.92" y="124.46"/>
-<instance part="GND7" gate="1" x="-124.46" y="99.06"/>
-<instance part="JP1" gate="G$1" x="-104.14" y="111.76"/>
+<instance part="+3V8" gate="G$1" x="152.4" y="68.58"/>
+<instance part="GND7" gate="1" x="149.86" y="43.18"/>
+<instance part="JP1" gate="G$1" x="170.18" y="55.88"/>
 <instance part="DHT22" gate="G$1" x="160.02" y="142.24" smashed="yes">
 <attribute name="VALUE" x="154.94" y="134.62" size="1.778" layer="96"/>
 <attribute name="NAME" x="154.94" y="150.622" size="1.778" layer="95"/>
 </instance>
-<instance part="C2" gate="G$1" x="-114.3" y="109.22"/>
+<instance part="C2" gate="G$1" x="160.02" y="53.34"/>
 </instances>
 <busses>
 </busses>
@@ -3773,12 +3777,12 @@ TSL2561  0x75
 </segment>
 <segment>
 <pinref part="GND3" gate="1" pin="GND"/>
-<wire x1="-132.08" y1="165.1" x2="-132.08" y2="160.02" width="0.2032" layer="91"/>
+<wire x1="48.26" y1="106.68" x2="48.26" y2="101.6" width="0.2032" layer="91"/>
 <pinref part="T-WALL" gate="G$1" pin="1"/>
-<wire x1="-132.08" y1="165.1" x2="-137.16" y2="165.1" width="0.2032" layer="91"/>
+<wire x1="48.26" y1="106.68" x2="43.18" y2="106.68" width="0.2032" layer="91"/>
 <pinref part="T-AIR" gate="G$1" pin="1"/>
-<wire x1="-137.16" y1="165.1" x2="-152.4" y2="165.1" width="0.2032" layer="91"/>
-<junction x="-137.16" y="165.1"/>
+<wire x1="43.18" y1="106.68" x2="27.94" y2="106.68" width="0.2032" layer="91"/>
+<junction x="43.18" y="106.68"/>
 </segment>
 <segment>
 <pinref part="GND6" gate="1" pin="GND"/>
@@ -3806,14 +3810,14 @@ TSL2561  0x75
 </segment>
 <segment>
 <pinref part="T_SURF" gate="G$1" pin="1"/>
-<wire x1="-127" y1="106.68" x2="-124.46" y2="106.68" width="0.2032" layer="91"/>
-<wire x1="-124.46" y1="106.68" x2="-124.46" y2="104.14" width="0.2032" layer="91"/>
+<wire x1="147.32" y1="50.8" x2="149.86" y2="50.8" width="0.2032" layer="91"/>
+<wire x1="149.86" y1="50.8" x2="149.86" y2="48.26" width="0.2032" layer="91"/>
 <pinref part="GND7" gate="1" pin="GND"/>
 <pinref part="C2" gate="G$1" pin="2"/>
-<wire x1="-124.46" y1="104.14" x2="-124.46" y2="101.6" width="0.2032" layer="91"/>
-<wire x1="-114.3" y1="106.68" x2="-114.3" y2="104.14" width="0.2032" layer="91"/>
-<wire x1="-114.3" y1="104.14" x2="-124.46" y2="104.14" width="0.2032" layer="91"/>
-<junction x="-124.46" y="104.14"/>
+<wire x1="149.86" y1="48.26" x2="149.86" y2="45.72" width="0.2032" layer="91"/>
+<wire x1="160.02" y1="50.8" x2="160.02" y2="48.26" width="0.2032" layer="91"/>
+<wire x1="160.02" y1="48.26" x2="149.86" y2="48.26" width="0.2032" layer="91"/>
+<junction x="149.86" y="48.26"/>
 </segment>
 </net>
 <net name="RESET" class="0">
@@ -3836,8 +3840,8 @@ TSL2561  0x75
 </segment>
 <segment>
 <pinref part="T_SURF" gate="G$1" pin="3"/>
-<wire x1="-127" y1="111.76" x2="-124.46" y2="111.76" width="0.2032" layer="91"/>
-<label x="-124.46" y="111.76" size="1.27" layer="95" xref="yes"/>
+<wire x1="147.32" y1="55.88" x2="149.86" y2="55.88" width="0.2032" layer="91"/>
+<label x="149.86" y="55.88" size="1.27" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="SDA" class="0">
@@ -3853,8 +3857,8 @@ TSL2561  0x75
 </segment>
 <segment>
 <pinref part="T_SURF" gate="G$1" pin="2"/>
-<wire x1="-127" y1="109.22" x2="-124.46" y2="109.22" width="0.2032" layer="91"/>
-<label x="-124.46" y="109.22" size="1.27" layer="95" xref="yes"/>
+<wire x1="147.32" y1="53.34" x2="149.86" y2="53.34" width="0.2032" layer="91"/>
+<label x="149.86" y="53.34" size="1.27" layer="95" xref="yes"/>
 </segment>
 </net>
 <net name="RXD" class="0">
@@ -3930,15 +3934,15 @@ TSL2561  0x75
 </net>
 <net name="TEMP_DQ" class="0">
 <segment>
-<wire x1="-152.4" y1="167.64" x2="-137.16" y2="167.64" width="0.1524" layer="91"/>
+<wire x1="27.94" y1="109.22" x2="43.18" y2="109.22" width="0.1524" layer="91"/>
 <pinref part="R1" gate="G$1" pin="1"/>
-<junction x="-124.46" y="167.64"/>
-<wire x1="-137.16" y1="167.64" x2="-124.46" y2="167.64" width="0.1524" layer="91"/>
-<wire x1="-124.46" y1="167.64" x2="-121.92" y2="167.64" width="0.1524" layer="91"/>
+<junction x="55.88" y="109.22"/>
+<wire x1="43.18" y1="109.22" x2="55.88" y2="109.22" width="0.1524" layer="91"/>
+<wire x1="55.88" y1="109.22" x2="58.42" y2="109.22" width="0.1524" layer="91"/>
 <pinref part="T-AIR" gate="G$1" pin="2"/>
 <pinref part="T-WALL" gate="G$1" pin="2"/>
-<junction x="-137.16" y="167.64"/>
-<label x="-121.92" y="167.64" size="1.27" layer="95" xref="yes"/>
+<junction x="43.18" y="109.22"/>
+<label x="58.42" y="109.22" size="1.27" layer="95" xref="yes"/>
 </segment>
 <segment>
 <pinref part="JP-DIGITAL2" gate="A" pin="7"/>
@@ -4080,17 +4084,17 @@ TSL2561  0x75
 <wire x1="81.28" y1="157.48" x2="81.28" y2="160.02" width="0.2032" layer="91"/>
 </segment>
 <segment>
-<wire x1="-152.4" y1="170.18" x2="-137.16" y2="170.18" width="0.1524" layer="91"/>
-<wire x1="-137.16" y1="170.18" x2="-132.08" y2="170.18" width="0.1524" layer="91"/>
-<wire x1="-132.08" y1="170.18" x2="-132.08" y2="177.8" width="0.1524" layer="91"/>
+<wire x1="27.94" y1="111.76" x2="43.18" y2="111.76" width="0.1524" layer="91"/>
+<wire x1="43.18" y1="111.76" x2="48.26" y2="111.76" width="0.1524" layer="91"/>
+<wire x1="48.26" y1="111.76" x2="48.26" y2="119.38" width="0.1524" layer="91"/>
 <pinref part="R1" gate="G$1" pin="2"/>
-<wire x1="-132.08" y1="177.8" x2="-124.46" y2="177.8" width="0.1524" layer="91"/>
+<wire x1="48.26" y1="119.38" x2="55.88" y2="119.38" width="0.1524" layer="91"/>
 <pinref part="T-AIR" gate="G$1" pin="3"/>
 <pinref part="T-WALL" gate="G$1" pin="3"/>
-<junction x="-137.16" y="170.18"/>
+<junction x="43.18" y="111.76"/>
 <pinref part="+3V2" gate="G$1" pin="VCCIO"/>
-<wire x1="-132.08" y1="177.8" x2="-132.08" y2="182.88" width="0.2032" layer="91"/>
-<junction x="-132.08" y="177.8"/>
+<wire x1="48.26" y1="119.38" x2="48.26" y2="124.46" width="0.2032" layer="91"/>
+<junction x="48.26" y="119.38"/>
 </segment>
 <segment>
 <pinref part="R2" gate="G$1" pin="2"/>
@@ -4122,21 +4126,21 @@ TSL2561  0x75
 </segment>
 <segment>
 <pinref part="T_SURF" gate="G$1" pin="4"/>
-<wire x1="-127" y1="114.3" x2="-121.92" y2="114.3" width="0.2032" layer="91"/>
-<wire x1="-121.92" y1="114.3" x2="-121.92" y2="116.84" width="0.2032" layer="91"/>
+<wire x1="147.32" y1="58.42" x2="152.4" y2="58.42" width="0.2032" layer="91"/>
+<wire x1="152.4" y1="58.42" x2="152.4" y2="60.96" width="0.2032" layer="91"/>
 <pinref part="+3V8" gate="G$1" pin="VCCIO"/>
 <pinref part="C2" gate="G$1" pin="1"/>
-<wire x1="-121.92" y1="116.84" x2="-121.92" y2="121.92" width="0.2032" layer="91"/>
-<wire x1="-114.3" y1="114.3" x2="-114.3" y2="116.84" width="0.2032" layer="91"/>
-<wire x1="-114.3" y1="116.84" x2="-121.92" y2="116.84" width="0.2032" layer="91"/>
-<junction x="-121.92" y="116.84"/>
+<wire x1="152.4" y1="60.96" x2="152.4" y2="66.04" width="0.2032" layer="91"/>
+<wire x1="160.02" y1="58.42" x2="160.02" y2="60.96" width="0.2032" layer="91"/>
+<wire x1="160.02" y1="60.96" x2="152.4" y2="60.96" width="0.2032" layer="91"/>
+<junction x="152.4" y="60.96"/>
 </segment>
 </net>
 <net name="MLX-CTRL" class="0">
 <segment>
 <pinref part="JP1" gate="G$1" pin="2"/>
-<wire x1="-96.52" y1="114.3" x2="-93.98" y2="114.3" width="0.2032" layer="91"/>
-<label x="-93.98" y="114.3" size="1.27" layer="95" xref="yes"/>
+<wire x1="177.8" y1="58.42" x2="180.34" y2="58.42" width="0.2032" layer="91"/>
+<label x="180.34" y="58.42" size="1.27" layer="95" xref="yes"/>
 </segment>
 <segment>
 <pinref part="JP-DIGITAL1" gate="A" pin="8"/>
@@ -4147,8 +4151,8 @@ TSL2561  0x75
 <net name="MLX-PWM" class="0">
 <segment>
 <pinref part="JP1" gate="G$1" pin="1"/>
-<wire x1="-96.52" y1="111.76" x2="-93.98" y2="111.76" width="0.2032" layer="91"/>
-<label x="-93.98" y="111.76" size="1.27" layer="95" xref="yes"/>
+<wire x1="177.8" y1="55.88" x2="180.34" y2="55.88" width="0.2032" layer="91"/>
+<label x="180.34" y="55.88" size="1.27" layer="95" xref="yes"/>
 </segment>
 <segment>
 <pinref part="JP-ANALOG" gate="A" pin="4"/>
