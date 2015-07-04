@@ -1,3 +1,5 @@
+
+
 //////////////////////////////////////////////////////////////////////////
 const int WALKERSTALKER_VERSION = 3;
 //////////////////////////////////////////////////////////////////////////
@@ -12,7 +14,7 @@ const int WALKERSTALKER_VERSION = 3;
 #include "avr/power.h"
 #include "avr/sleep.h"
 #include "avr/wdt.h"
-#include <ProgmemString/ProgmemString.h>
+#include <ProgmemString.h>
 #include <dht.h>
 #include <StraightBuffer.h>
 #include <Logging.h>
@@ -43,9 +45,11 @@ using namespace ArduinoJson::Generator;
 // Sensors
 
 // Temperature
-OneWire oneWire(TEMP_PROBE_PIN);
+// Setup a oneWire instance to communicate with any OneWire devices
+OneWire oneWire(TEMP_PROBE_PIN); 
+// Pass our oneWire reference to Dallas Temperature.
 DallasTemperature temperatureProbes(&oneWire);
-Adafruit_TMP006 thermopileSensor(TMP006_ADDRESS);
+Adafruit_TMP006 thermopileSensor(TMP006_ADDRESS); // start with a diferent i2c address!
 
 // Humidity - DHT22
 // The '3' fixes errors at the 8MHz clock rate. Cannot remember why
@@ -55,11 +59,12 @@ dht humiditySensor;
 Adafruit_TSL2561_Unified lightSensor = Adafruit_TSL2561_Unified(TSL2561_ADDRESS, 1);
 
 // Power - Split current clamp
-EnergyMonitor currentSensor;
+//EnergyMonitor currentSensor;
 
 // Battery Monitor - Stalker built-in
 Battery battery;
 
+//define dictionary for sensorData
 JsonObject<11> sensorData;
 
 //////////////////////////////////////////////////////////////////////////
@@ -110,6 +115,7 @@ void setup(){
 	startXBee();
 	RTC.begin();
 	startSensors();
+
 }
 
 
@@ -377,7 +383,7 @@ void initialiseTemperature(){
 
 /**
 * Read the air temperature
-* @return Air temperature in °C
+* @return Air temperature in ï¿½C
 */
 float readAirTemperature(){
 	temperatureProbes.requestTemperatures();
@@ -387,7 +393,7 @@ float readAirTemperature(){
 
 /**
 * Read the temperature radiating off the wall
-* @return Radiant wall temperature in °C
+* @return Radiant wall temperature in ï¿½C
 */
 float readWallTemperature(){
 	return temperatureProbes.getTempC(wallTemperatureAddresses[UNIT_NUMBER]);
@@ -396,7 +402,7 @@ float readWallTemperature(){
 
 /**
 * Read the surface temperature using the IR thermopile sensor
-* @return Surface temperature in °C
+* @return Surface temperature in ï¿½C
 */
 float readSurfaceTemperature(){
 	return thermopileSensor.readObjTempC();
@@ -405,7 +411,7 @@ float readSurfaceTemperature(){
 
 /**
 * Read the case temperature of the unit
-* @return Case temperature in °C
+* @return Case temperature in ï¿½C
 */
 float readCaseTemperature(){
 	RTC.convertTemperature();
