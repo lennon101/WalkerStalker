@@ -70,6 +70,9 @@ JsonObject<11> sensorData;
 //////////////////////////////////////////////////////////////////////////
 // Communication
 
+/*LOGGER_SERIAL_ refers to a separate stream of data W.R.T to the normal serial data
+The SoftwareSerial library has been developed to allow serial communication on other 
+digital pins of the Arduino, using software to replicate the functionality (hence the name "SoftwareSerial")*/
 SoftwareSerial loggerStream(LOGGER_SERIAL_RX, LOGGER_SERIAL_TX);
 
 // Transmit packet buffer
